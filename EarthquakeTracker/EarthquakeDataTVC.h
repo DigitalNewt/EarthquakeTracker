@@ -6,9 +6,10 @@
 //  Copyright © 2016 HBB Global. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 @interface EarthquakeDataTVC : UITableViewController
+
 @property (nonatomic, strong) NSArray *earthquakes;  //Latest list of Earthquake data in NSDictionaries
 
 @end

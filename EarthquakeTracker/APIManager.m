@@ -97,33 +97,34 @@ NSString *const kQuery = @"query";
                                }
                            }];
 }
-//
-///*
-// * HTTP Get Request
-// * @returns Dictionary with results.
-// */
-//+ (void)sendHTTPGet:(NSDictionary *)queryData withAction:(NSString *)action onCompletion:(RequestCompletionHandler)complete
-//{
-//    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-//    
-//    NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
-//    NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration:defaultConfigObject
-//                                                                 delegate:self
-//                                                            delegateQueue:[NSOperationQueue mainQueue]];
-//    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",rootURL, action, [self toURL:queryData]]];
-//    
-//    NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithURL:url
-//                                                    completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-//        if(error == nil)
-//        {
-//            NSString * text = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
-//            NSLog(@"Data = %@",text);
-//        }
-//        
-//    }];
-//    
-//    [dataTask resume];
-//    
-//}
+
+/*
+ * HTTP Get Request
+ * @returns Dictionary with results.
+ */
++ (void)sendHTTPGet:(NSDictionary *)queryData withAction:(NSString *)action onCompletion:(RequestCompletionHandler)complete
+{
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    
+    NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
+//    defaultConfigObject.timeoutIntervalForRequest = 50;
+    NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration:defaultConfigObject
+                                                                 delegate:nil
+                                                            delegateQueue:[NSOperationQueue mainQueue]];
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",rootURL, action, [self toURL:queryData]]];
+    
+    NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithURL:url
+                                                    completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if(error == nil)
+        {
+            NSString * text = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
+            NSLog(@"Data = %@",text);
+        }
+        
+    }];
+    
+    [dataTask resume];
+    
+}
 
 @end

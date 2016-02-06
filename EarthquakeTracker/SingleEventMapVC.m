@@ -7,31 +7,104 @@
 //
 
 #import "SingleEventMapVC.h"
+@import MapKit;
 
-@interface SingleEventMapVC ()
+@interface SingleEventMapVC () <MKMapViewDelegate>
 
+@property (weak, nonatomic) IBOutlet MKMapView *singleMapView;
 @end
+
+//Wimbledon Coordiantes
+//#define LATITUDE 51.434783;
+//#define LONGITUDE -0.213428;
+
+//Span
+#define DEFAULT_SPAN 5.0f;
 
 @implementation SingleEventMapVC
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
+    static NSString *reuseId = @"SingleEventMapVC";
+    MKAnnotationView *view = [mapView dequeueReusableAnnotationViewWithIdentifier:reuseId];
+    if (!view) {
+        view = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseId];
+        
+        view.canShowCallout = YES;
+    }
+    
+    view.annotation = annotation;
+    
+    return view;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void) updateSingleMapViewAnnotations {
+    [self.singleMapView removeAnnotations:self.singleMapView.annotations];
+    NSArray *quakes = @[self.quake];
+    [self.singleMapView addAnnotations:quakes];
+    [self.singleMapView showAnnotations:quakes animated:YES];
+    NSLog(@"latitude = %f", self.quake.coordinate.latitude);
+    NSLog(@"longitude = %f", self.quake.coordinate.longitude);
+
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)setSinlgeMapView:(MKMapView *)singleMapView {
+    _singleMapView = singleMapView;
+    self.singleMapView.delegate = self;
+    [self updateSingleMapViewAnnotations];
 }
-*/
+
+- (void)setQuake:(Quake *)quake {
+    _quake = quake;
+    self.title = quake.place;
+    [self updateSingleMapViewAnnotations];
+}
+
+
+//- (void)viewDidLoad {
+//    [super viewDidLoad];
+//    
+//    //Create the region
+//    MKCoordinateRegion earthquakeRegion;
+//    
+//    //Center
+//    CLLocationCoordinate2D earthquakeCenter;
+////    earthquakeCenter.latitude = [self.quake.latitude doubleValue];
+////    earthquakeCenter.longitude = [self.quake.longitude doubleValue];
+//    
+//    earthquakeCenter.latitude = LATITUDE;
+//    earthquakeCenter.longitude = LONGITUDE;
+//    NSLog(@"Latatude =  %f",earthquakeCenter.latitude);
+//    NSLog(@"Longitude =  %f",earthquakeCenter.longitude);
+//    
+//    
+//    //Span
+//    MKCoordinateSpan span;
+//    span.latitudeDelta = DEFAULT_SPAN;
+//    span.longitudeDelta = DEFAULT_SPAN;
+//    
+//    earthquakeRegion.center = earthquakeCenter;
+//    earthquakeRegion.span = span;
+//    
+//    //Set mapView
+//    [self.singleMapView setRegion:earthquakeRegion animated:YES];
+//    
+//    //Create a coordiante for use with the annotation
+//    CLLocationCoordinate2D wimbLocation;
+//    wimbLocation.latitude = LATITUDE;
+//    wimbLocation.longitude = LONGITUDE;
+////    wimbLocation.latitude = [self.quake.latitude doubleValue];;
+////    wimbLocation.longitude = [self.quake.longitude doubleValue];;
+//    
+//    Annotation * myAnnotation = [Annotation alloc];
+//    myAnnotation.coordinate = wimbLocation;
+//    myAnnotation.title = @"Dude";
+//    myAnnotation.subtitle = @"This is cool!!";
+//    
+//    
+//    [self.singleMapView addAnnotation:myAnnotation];
+//    
+//    
+//    
+//}
 
 @end

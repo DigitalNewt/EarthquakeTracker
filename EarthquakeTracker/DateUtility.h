@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Ravetree. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 @interface DateUtility : NSObject
 - (NSDate *)getDate18YearsFromNow;

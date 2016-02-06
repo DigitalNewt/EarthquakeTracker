@@ -7,6 +7,8 @@
 //
 
 #import "EarthquakeDataTVC.h"
+#import "SingleEventMapVC.h"
+#import "APIManager.h"
 
 @interface EarthquakeDataTVC ()
 
@@ -27,23 +29,17 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.navigationBar.opaque = YES;
+    //    self.navigationController.navigationBar.tintColor = [UIColor clearColor];
+    self.navigationController.navigationBar.backgroundColor = [UIColor brownColor];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-#pragma mark - UITableViewDataSource
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.earthquakes.count;
-}
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellIdentifier = @"Earthquake Data Cell";
@@ -54,11 +50,10 @@
     formatter.numberStyle = NSNumberFormatterDecimalStyle;
     NSDictionary *earthquake = self.earthquakes[indexPath.row];
     
-    cell.detailTextLabel.text = [formatter stringFromNumber:[earthquake valueForKeyPath:@"properties.mag"]];
-    cell.textLabel.text = [earthquake valueForKeyPath:@"properties.place"];
+    cell.detailTextLabel.text = [formatter stringFromNumber:[earthquake valueForKeyPath:EARTHQUAKE_MAGNITUDE]];
+    cell.textLabel.text = [earthquake valueForKeyPath:EARTHQUAKE_PLACE];
     return cell;
 }
-
 
 /*
 // Override to support conditional editing of the table view.
@@ -94,14 +89,29 @@
 }
 */
 
-/*
+
 #pragma mark - Navigation
+
+- (void)prepareSingleEventMapVC:(SingleEventMapVC *)vc toDisplayMap:(NSDictionary *)data {
+    vc.title = [data valueForKeyPath:@"properties.place"];
+    
+}
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    NSIndexPath * indexPath = [self.tableView indexPathForCell:sender];
+    if (indexPath) {
+        if ([segue.identifier isEqualToString:@"Display Location"]) {
+            if ([segue.destinationViewController isKindOfClass:[SingleEventMapVC class]]) {
+                [self prepareSingleEventMapVC:segue.destinationViewController
+                                 toDisplayMap:self.earthquakes[indexPath.row]];
+            }
+        }
+    }
 }
-*/
+
 
 @end

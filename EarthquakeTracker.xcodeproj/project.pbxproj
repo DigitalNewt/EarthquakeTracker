@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F0159721C63D2B100C98FAF /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F0159711C63D2B100C98FAF /* MapKit.framework */; };
+		0F0159781C63ED4300C98FAF /* Annotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F0159771C63ED4300C98FAF /* Annotation.m */; };
+		0F01598A1C642C0900C98FAF /* Quake+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F0159871C642C0900C98FAF /* Quake+CoreDataProperties.m */; };
+		0F01598B1C642C0900C98FAF /* Quake.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F0159891C642C0900C98FAF /* Quake.m */; };
+		0F0159911C6511C900C98FAF /* CoreDataTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F0159901C6511C900C98FAF /* CoreDataTVC.m */; };
+		0F01599A1C651B3700C98FAF /* EarthquakeCDTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F0159991C651B3700C98FAF /* EarthquakeCDTVC.m */; };
 		0F37A57A1C6279B30058480F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F37A5791C6279B30058480F /* main.m */; };
 		0F37A57D1C6279B30058480F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F37A57C1C6279B30058480F /* AppDelegate.m */; };
 		0F37A5801C6279B30058480F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F37A57F1C6279B30058480F /* ViewController.m */; };
@@ -24,6 +30,7 @@
 		0F37A5CB1C62BEE60058480F /* FullMapVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F37A5CA1C62BEE60058480F /* FullMapVC.m */; };
 		0F37A5D11C62D6050058480F /* EarthquakeDataTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F37A5D01C62D6050058480F /* EarthquakeDataTVC.m */; };
 		0F37A5D41C62DD570058480F /* JustPostedEarthquakeDataTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F37A5D31C62DD570058480F /* JustPostedEarthquakeDataTVC.m */; };
+		0FAEA6D31C6649BA001724BC /* Quake+Annotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAEA6D21C6649BA001724BC /* Quake+Annotation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +51,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0F0159711C63D2B100C98FAF /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		0F0159761C63ED4300C98FAF /* Annotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Annotation.h; sourceTree = "<group>"; };
+		0F0159771C63ED4300C98FAF /* Annotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Annotation.m; sourceTree = "<group>"; };
+		0F0159861C642C0900C98FAF /* Quake+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Quake+CoreDataProperties.h"; sourceTree = "<group>"; };
+		0F0159871C642C0900C98FAF /* Quake+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Quake+CoreDataProperties.m"; sourceTree = "<group>"; };
+		0F0159881C642C0900C98FAF /* Quake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Quake.h; sourceTree = "<group>"; };
+		0F0159891C642C0900C98FAF /* Quake.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Quake.m; sourceTree = "<group>"; };
+		0F01598F1C6511C900C98FAF /* CoreDataTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataTVC.h; sourceTree = "<group>"; };
+		0F0159901C6511C900C98FAF /* CoreDataTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataTVC.m; sourceTree = "<group>"; };
+		0F0159981C651B3700C98FAF /* EarthquakeCDTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EarthquakeCDTVC.h; sourceTree = "<group>"; };
+		0F0159991C651B3700C98FAF /* EarthquakeCDTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EarthquakeCDTVC.m; sourceTree = "<group>"; };
+		0F0159A11C65440000C98FAF /* QuakeDatabaseAvailibility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuakeDatabaseAvailibility.h; sourceTree = "<group>"; };
 		0F37A5751C6279B30058480F /* EarthquakeTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EarthquakeTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F37A5791C6279B30058480F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0F37A57B1C6279B30058480F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -76,6 +95,9 @@
 		0F37A5D01C62D6050058480F /* EarthquakeDataTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EarthquakeDataTVC.m; sourceTree = "<group>"; };
 		0F37A5D21C62DD570058480F /* JustPostedEarthquakeDataTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JustPostedEarthquakeDataTVC.h; sourceTree = "<group>"; };
 		0F37A5D31C62DD570058480F /* JustPostedEarthquakeDataTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JustPostedEarthquakeDataTVC.m; sourceTree = "<group>"; };
+		0FAEA6D11C6649BA001724BC /* Quake+Annotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Quake+Annotation.h"; sourceTree = "<group>"; };
+		0FAEA6D21C6649BA001724BC /* Quake+Annotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Quake+Annotation.m"; sourceTree = "<group>"; };
+		0FAEA6D41C666D53001724BC /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +105,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F0159721C63D2B100C98FAF /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,9 +126,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0F01597F1C642B7300C98FAF /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				0F0159861C642C0900C98FAF /* Quake+CoreDataProperties.h */,
+				0F0159871C642C0900C98FAF /* Quake+CoreDataProperties.m */,
+				0F0159881C642C0900C98FAF /* Quake.h */,
+				0F0159891C642C0900C98FAF /* Quake.m */,
+				0F37A5841C6279B30058480F /* EarthquakeTracker.xcdatamodeld */,
+				0FAEA6D11C6649BA001724BC /* Quake+Annotation.h */,
+				0FAEA6D21C6649BA001724BC /* Quake+Annotation.m */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
 		0F37A56C1C6279B30058480F = {
 			isa = PBXGroup;
 			children = (
+				0FAEA6D41C666D53001724BC /* QuartzCore.framework */,
+				0F0159711C63D2B100C98FAF /* MapKit.framework */,
 				0F37A5771C6279B30058480F /* EarthquakeTracker */,
 				0F37A5941C6279B40058480F /* EarthquakeTrackerTests */,
 				0F37A59F1C6279B40058480F /* EarthquakeTrackerUITests */,
@@ -126,6 +165,7 @@
 		0F37A5771C6279B30058480F /* EarthquakeTracker */ = {
 			isa = PBXGroup;
 			children = (
+				0F01597F1C642B7300C98FAF /* Data */,
 				0F37A5C11C6293A70058480F /* Controllers */,
 				0F37A5B81C627A5A0058480F /* API */,
 				0F37A5AE1C627A2F0058480F /* Utility */,
@@ -135,9 +175,9 @@
 				0F37A5871C6279B30058480F /* Assets.xcassets */,
 				0F37A5891C6279B30058480F /* LaunchScreen.storyboard */,
 				0F37A58C1C6279B40058480F /* Info.plist */,
-				0F37A5841C6279B30058480F /* EarthquakeTracker.xcdatamodeld */,
 				0F37A5781C6279B30058480F /* Supporting Files */,
 				0F37A5BC1C6293560058480F /* iPhone.storyboard */,
+				0F0159A11C65440000C98FAF /* QuakeDatabaseAvailibility.h */,
 			);
 			path = EarthquakeTracker;
 			sourceTree = "<group>";
@@ -201,6 +241,12 @@
 				0F37A5D01C62D6050058480F /* EarthquakeDataTVC.m */,
 				0F37A5D21C62DD570058480F /* JustPostedEarthquakeDataTVC.h */,
 				0F37A5D31C62DD570058480F /* JustPostedEarthquakeDataTVC.m */,
+				0F0159761C63ED4300C98FAF /* Annotation.h */,
+				0F0159771C63ED4300C98FAF /* Annotation.m */,
+				0F01598F1C6511C900C98FAF /* CoreDataTVC.h */,
+				0F0159901C6511C900C98FAF /* CoreDataTVC.m */,
+				0F0159981C651B3700C98FAF /* EarthquakeCDTVC.h */,
+				0F0159991C651B3700C98FAF /* EarthquakeCDTVC.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -272,6 +318,11 @@
 				TargetAttributes = {
 					0F37A5741C6279B30058480F = {
 						CreatedOnToolsVersion = 7.2;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					0F37A5901C6279B40058480F = {
 						CreatedOnToolsVersion = 7.2;
@@ -336,17 +387,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0FAEA6D31C6649BA001724BC /* Quake+Annotation.m in Sources */,
+				0F01599A1C651B3700C98FAF /* EarthquakeCDTVC.m in Sources */,
 				0F37A5B41C627A430058480F /* DateUtility.m in Sources */,
 				0F37A5D11C62D6050058480F /* EarthquakeDataTVC.m in Sources */,
 				0F37A5D41C62DD570058480F /* JustPostedEarthquakeDataTVC.m in Sources */,
 				0F37A5801C6279B30058480F /* ViewController.m in Sources */,
 				0F37A5C81C62A2A80058480F /* SingleEventMapVC.m in Sources */,
 				0F37A5861C6279B30058480F /* EarthquakeTracker.xcdatamodeld in Sources */,
+				0F0159781C63ED4300C98FAF /* Annotation.m in Sources */,
+				0F0159911C6511C900C98FAF /* CoreDataTVC.m in Sources */,
 				0F37A5B31C627A430058480F /* JSONUtility.m in Sources */,
 				0F37A5BB1C627B520058480F /* APIManager.m in Sources */,
+				0F01598A1C642C0900C98FAF /* Quake+CoreDataProperties.m in Sources */,
 				0F37A57D1C6279B30058480F /* AppDelegate.m in Sources */,
 				0F37A5CB1C62BEE60058480F /* FullMapVC.m in Sources */,
 				0F37A57A1C6279B30058480F /* main.m in Sources */,
+				0F01598B1C642C0900C98FAF /* Quake.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -570,6 +627,7 @@
 				0F37A5A71C6279B40058480F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0F37A5A81C6279B40058480F /* Build configuration list for PBXNativeTarget "EarthquakeTrackerTests" */ = {
 			isa = XCConfigurationList;
@@ -578,6 +636,7 @@
 				0F37A5AA1C6279B40058480F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0F37A5AB1C6279B40058480F /* Build configuration list for PBXNativeTarget "EarthquakeTrackerUITests" */ = {
 			isa = XCConfigurationList;
@@ -586,6 +645,7 @@
 				0F37A5AD1C6279B40058480F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

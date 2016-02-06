@@ -6,9 +6,9 @@
 //  Copyright © 2016 HBB Global. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
 #import "APIManager.h"
 #import "JSONUtility.h"
+@import XCTest;
 
 @interface EarthquakeTrackerTests : XCTestCase
 @property (nonatomic,strong) NSManagedObjectContext* managedObjectContext;
@@ -66,9 +66,21 @@
         
     }
     
-    NSArray *information = [results objectForKey:@"features"];
+    NSArray *information = [results objectForKey:EARTHQUAKE_FEATURES];
     
     XCTAssertTrue(information.count > 0);
+    
+    for (NSDictionary *quake in information) {
+        NSLog(@"ID = %@",[quake valueForKeyPath:EARTHQUAKE_EVENT_ID]);
+        NSLog(@"place = %@", [quake valueForKeyPath:EARTHQUAKE_PLACE]);
+        NSLog(@"magnitude = %@", [quake valueForKeyPath:EARTHQUAKE_MAGNITUDE]);
+        if ([quake valueForKey:EARTHQUAKE_TSUNAMI] != [NSNull null]) {
+            NSLog(@"tsunami = %@", [quake valueForKeyPath:EARTHQUAKE_TSUNAMI]);
+        } else {
+            NSLog(@"tsunami = was null");
+        }
+        NSLog(@"coordinates = %@", [quake valueForKeyPath:EARTHQUAKE_LOCATION]);
+    }
 }
 
 @end

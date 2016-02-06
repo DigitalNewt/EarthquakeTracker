@@ -6,8 +6,11 @@
 //  Copyright © 2016 HBB Global. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "Quake+Annotation.h"
+@import UIKit;
 
 @interface SingleEventMapVC : UIViewController
+
+@property (nonatomic, strong) Quake *quake;
 
 @end

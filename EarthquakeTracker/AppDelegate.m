@@ -7,8 +7,16 @@
 //
 
 #import "AppDelegate.h"
+#import "APIManager.h"
+#import "Quake.h"
+#import "JSONUtility.h"
+#import "QuakeDatabaseAvailibility.h"
+
+#define BACKGROUND_QUAKE_FETCH_LIMIT @"100"
+#define BACKGROUND_QUAKE_FETCH_ORDERBY @"time"
 
 @interface AppDelegate ()
+@property (strong, nonatomic) NSManagedObjectContext *quakeDatabaseContext;
 
 @end
 
@@ -17,9 +25,34 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    self.quakeDatabaseContext = [self managedObjectContext];
+    [self fetchEarthquakeData:application performFetchWithCompletionHandler:UIBackgroundFetchResultNewData];
     return YES;
 }
 
+- (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
+{
+    if (self.quakeDatabaseContext) {
+        NSDictionary *queryData = [APIManager constructQuery:BACKGROUND_QUAKE_FETCH_LIMIT withOrder: BACKGROUND_QUAKE_FETCH_ORDERBY];
+        
+        [APIManager requestHTTPGet:queryData withAction:kQuery onCompletion: ^(NSString *result, NSError *error){
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (error) {
+                    NSLog(@"Earthquake background fetch failed: %@", error.localizedDescription);
+                    completionHandler(UIBackgroundFetchResultNoData);
+                    
+                    NSLog(@"%@", error);
+                } else {
+                    [self stopFetchingEarthquakeData:result
+                                         intoContext:self.quakeDatabaseContext];
+                }
+            });
+        }];
+
+    }else {
+        completionHandler(UIBackgroundFetchResultNoData);
+    }
+}
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
@@ -107,6 +140,60 @@
     _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
     [_managedObjectContext setPersistentStoreCoordinator:coordinator];
     return _managedObjectContext;
+}
+
+#pragma mark - Database Context
+
+- (void)setQuakeDatabaseContext:(NSManagedObjectContext *)quakeDatabaseContext
+{
+    _quakeDatabaseContext = quakeDatabaseContext;
+        
+    NSDictionary *userInfo = self.quakeDatabaseContext ? @{ QUAKE_DATABASE_AVAILIBILITY_CONTEXT : self.quakeDatabaseContext } : nil;
+    [[NSNotificationCenter defaultCenter] postNotificationName:QUAKE_DATABASE_AVAILIBILITY_NOTIFICATION
+                                                        object:self
+                                                      userInfo:userInfo];
+}
+
+#pragma mark - Fetch Earthquake data
+
+/**
+ * Call API to retrieve Earthquake data
+ @returns void
+ */
+- (void)fetchEarthquakeData:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler{
+    
+    
+    if (self.quakeDatabaseContext) {
+        NSDictionary *queryData = [APIManager constructQuery:BACKGROUND_QUAKE_FETCH_LIMIT withOrder: BACKGROUND_QUAKE_FETCH_ORDERBY];
+        
+        [APIManager requestHTTPGet:queryData withAction:kQuery onCompletion: ^(NSString *result, NSError *error){
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (error) {
+                    NSLog(@"Earthquake background fetch failed: %@", error.localizedDescription);
+                    completionHandler(UIBackgroundFetchResultNoData);
+                    
+                    NSLog(@"%@", error);
+                } else {
+                    [self stopFetchingEarthquakeData:result intoContext:self.quakeDatabaseContext];
+                }
+            });
+        }];
+    }
+}
+
+/**
+ * Stop retrieveing Earthquake data and reload tableview.
+ */
+-(void)stopFetchingEarthquakeData:(NSString *) result
+                      intoContext:(NSManagedObjectContext *)context {
+    if (context) {
+        NSDictionary *results = [JSONUtility getDictionaryFromJSON:result];
+        NSArray *earthquakes = [results objectForKey:EARTHQUAKE_FEATURES];
+        [context performBlock:^{
+            [Quake loadEarthquakeDataFromArray:earthquakes intoManagedObjectCOntext:context];
+            [context save:NULL];
+        }];
+    }    
 }
 
 #pragma mark - Core Data Saving support

@@ -8,6 +8,16 @@
 
 @import UIKit;
 
+#define EARTHQUAKE_URL @"properties.url"
+#define EARTHQUAKE_TIME @"properties.time"
+#define EARTHQUAKE_TIME_ZONE @"properties.tz"
+#define EARTHQUAKE_TSUNAMI @"properties.tsunami"
+#define EARTHQUAKE_EVENT_ID @"properties.ids"
+#define EARTHQUAKE_LOCATION @"geometry.coordinates"
+#define EARTHQUAKE_MAGNITUDE @"properties.mag"
+#define EARTHQUAKE_PLACE @"properties.place"
+#define EARTHQUAKE_FEATURES @"features"
+
 extern NSString *const kQuery;
 
 typedef void(^RequestCompletionHandler) (NSString*, NSError*);
@@ -18,6 +28,6 @@ typedef void(^RequestCompletionHandler) (NSString*, NSError*);
 
 + (void)requestHTTPGet:(NSDictionary *)userData withAction:(NSString *)action onCompletion:(RequestCompletionHandler)complete;
 
-//+ (void)sendHTTPGet:(NSDictionary *)userData withAction:(NSString *)action onCompletion:(RequestCompletionHandler)complete;
++ (void)sendHTTPGet:(NSDictionary *)userData withAction:(NSString *)action onCompletion:(RequestCompletionHandler)complete;
 
 @end

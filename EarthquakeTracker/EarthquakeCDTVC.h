@@ -1,14 +1,14 @@
 //
-//  FullMapVC.h
+//  EarthquakeCDTVC.h
 //  EarthquakeTracker
 //
-//  Created by Brent Baker on 2/3/16.
+//  Created by Brent Baker on 2/5/16.
 //  Copyright © 2016 HBB Global. All rights reserved.
 //
 
-@import UIKit;
+#import "CoreDataTVC.h"
 
-@interface FullMapVC : UIViewController
+@interface EarthquakeCDTVC : CoreDataTVC
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="CWR-Zy-AnX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="CWR-Zy-AnX">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -8,7 +8,7 @@
         <!--Earthquake Tracker-->
         <scene sceneID="R4u-0X-SK0">
             <objects>
-                <tableViewController id="fX8-3t-2su" customClass="JustPostedEarthquakeDataTVC" sceneMemberID="viewController">
+                <tableViewController id="fX8-3t-2su" customClass="EarthquakeCDTVC" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="1eO-nO-SBd">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -59,7 +59,7 @@
             </objects>
             <point key="canvasLocation" x="1262" y="-282"/>
         </scene>
-        <!--Full Map-->
+        <!--Full MapVC-->
         <scene sceneID="3iL-1B-FmC">
             <objects>
                 <viewController id="phz-wQ-Kwr" customClass="FullMapVC" sceneMemberID="viewController">
@@ -70,24 +70,38 @@
                     <view key="view" contentMode="scaleToFill" id="wT8-CS-kMN">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="dva-0b-Yqk">
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                            </mapView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="dva-0b-Yqk" firstAttribute="top" secondItem="wT8-CS-kMN" secondAttribute="top" constant="20" symbolic="YES" id="cIg-3b-wRU"/>
+                            <constraint firstItem="dva-0b-Yqk" firstAttribute="leading" secondItem="wT8-CS-kMN" secondAttribute="leading" id="f7G-YZ-LYU"/>
+                            <constraint firstItem="dva-0b-Yqk" firstAttribute="bottom" secondItem="Bf6-C9-J22" secondAttribute="top" id="hu2-ie-aaV"/>
+                            <constraint firstAttribute="trailing" secondItem="dva-0b-Yqk" secondAttribute="trailing" id="zbv-hH-6gj"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Full Map" id="29J-zn-JVp">
+                    <navigationItem key="navigationItem" id="29J-zn-JVp">
                         <barButtonItem key="leftBarButtonItem" systemItem="stop" id="CrK-Jb-Ef0">
                             <connections>
                                 <action selector="exit:" destination="phz-wQ-Kwr" id="Jvt-Nr-G07"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="fullMapView" destination="dva-0b-Yqk" id="b1h-Vy-Z1R"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q37-AH-NHz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2040" y="-669"/>
         </scene>
-        <!--View Controller-->
+        <!--Single Event MapVC-->
         <scene sceneID="f0w-Is-Efe">
             <objects>
-                <viewController id="fdM-hV-4Le" sceneMemberID="viewController">
+                <viewController id="fdM-hV-4Le" customClass="SingleEventMapVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0lr-Oc-SiC"/>
                         <viewControllerLayoutGuide type="bottom" id="npd-XJ-PP9"/>
@@ -95,9 +109,23 @@
                     <view key="view" contentMode="scaleToFill" id="5VV-QI-tf5">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Wes-bw-kpZ">
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                            </mapView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Wes-bw-kpZ" firstAttribute="bottom" secondItem="npd-XJ-PP9" secondAttribute="top" id="711-5V-eJq"/>
+                            <constraint firstItem="Wes-bw-kpZ" firstAttribute="top" secondItem="5VV-QI-tf5" secondAttribute="top" constant="20" symbolic="YES" id="GSL-pT-HY6"/>
+                            <constraint firstAttribute="trailing" secondItem="Wes-bw-kpZ" secondAttribute="trailing" id="KCA-gF-7Tu"/>
+                            <constraint firstItem="Wes-bw-kpZ" firstAttribute="leading" secondItem="5VV-QI-tf5" secondAttribute="leading" id="k9F-jj-iDs"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="2ea-kZ-bcC"/>
+                    <connections>
+                        <outlet property="singleMapView" destination="Wes-bw-kpZ" id="ONd-Lp-fyB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G0F-U3-nd8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

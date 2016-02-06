@@ -10,4 +10,6 @@
 
 @interface JustPostedEarthquakeDataTVC : EarthquakeDataTVC
 
+@property (nonatomic, strong) NSManagedObjectContext *manageedObjectContext;
+
 @end

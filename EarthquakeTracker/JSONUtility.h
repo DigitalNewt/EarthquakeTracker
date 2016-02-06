@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Ravetree. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 @interface JSONUtility : NSObject
 + (NSDictionary *)getDictionaryFromJSON:(NSString *) jsonString;

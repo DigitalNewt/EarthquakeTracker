@@ -12,7 +12,7 @@
 #import "JSONUtility.h"
 #import "QuakeDatabaseAvailibility.h"
 
-#define BACKGROUND_QUAKE_FETCH_LIMIT @"100"
+#define BACKGROUND_QUAKE_FETCH_LIMIT @"1000"
 #define BACKGROUND_QUAKE_FETCH_ORDERBY @"time"
 
 @interface AppDelegate ()

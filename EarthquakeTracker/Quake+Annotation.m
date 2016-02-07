@@ -13,8 +13,13 @@
 - (CLLocationCoordinate2D)coordinate {
     CLLocationCoordinate2D coordinate;
     
-    coordinate.latitude = [self.latitude doubleValue];
-    coordinate.longitude = [self.longitude doubleValue];
+//    coordinate.latitude = [self.latitude doubleValue];
+//    coordinate.longitude = [self.longitude doubleValue];
+    MKMapPoint mapPoint;
+    mapPoint.x = [self.latitude doubleValue];
+    mapPoint.y = [self.longitude doubleValue];
+    
+    coordinate = MKCoordinateForMapPoint(mapPoint);
     
     return coordinate;
 }

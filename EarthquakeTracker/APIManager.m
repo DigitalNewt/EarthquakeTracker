@@ -60,11 +60,13 @@ NSString *const kQuery = @"query";
 + (NSDictionary *)constructQuery:(NSString *)limit withOrder: (NSString *) orderby {
     NSString *format = @"geojson";
     NSString *eventtype = @"earthquake";
+    NSString *jsonerror = @"true";
     
     NSDictionary *queryData = @{@"limit":limit,
                                 @"eventtype":eventtype,
                                 @"orderby":orderby,
-                                @"format":format};
+                                @"format":format,
+                                @"jsonerror":jsonerror};
 
     return queryData;
 }

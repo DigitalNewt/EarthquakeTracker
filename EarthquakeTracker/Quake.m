@@ -45,16 +45,12 @@
 //            quake.tsunami = false;
 //        }
         NSArray *coordinates = [quakeDictionary valueForKeyPath:EARTHQUAKE_LOCATION];
+        
         // The longitude, latitude, and depth values are stored in an array in JSON.
         // Access these values by index directly.
         quake.latitude = (NSDecimalNumber *) @([coordinates[0] doubleValue]);
         quake.longitude = (NSDecimalNumber *) @([coordinates[1] doubleValue]);
         quake.depth = (NSDecimalNumber *) @([coordinates[2] doubleValue]);
-//        quake.latitude = (NSDecimalNumber *)[NSDecimalNumber numberWithFloat:[coordinates[0] doubleValue]];
-//        quake.longitude = (NSDecimalNumber *)[NSDecimalNumber numberWithFloat:[coordinates[1] doubleValue]];
-//        quake.depth = (NSDecimalNumber *)[NSDecimalNumber numberWithFloat:[coordinates[2] doubleValue]];
-        NSLog(@"Latitude = %f  :  %@", [coordinates[0] floatValue], quake.latitude);
-        NSLog(@"Longitude = %f  :  %@", [coordinates[1] floatValue], quake.longitude);
         
         NSNumber *time = [quakeDictionary valueForKeyPath:EARTHQUAKE_TIME];
         NSTimeInterval timeInterval = [time doubleValue] / 1000.0;

@@ -8,15 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		0F0159721C63D2B100C98FAF /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F0159711C63D2B100C98FAF /* MapKit.framework */; };
-		0F0159781C63ED4300C98FAF /* Annotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F0159771C63ED4300C98FAF /* Annotation.m */; };
 		0F01598A1C642C0900C98FAF /* Quake+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F0159871C642C0900C98FAF /* Quake+CoreDataProperties.m */; };
 		0F01598B1C642C0900C98FAF /* Quake.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F0159891C642C0900C98FAF /* Quake.m */; };
 		0F0159911C6511C900C98FAF /* CoreDataTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F0159901C6511C900C98FAF /* CoreDataTVC.m */; };
 		0F01599A1C651B3700C98FAF /* EarthquakeCDTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F0159991C651B3700C98FAF /* EarthquakeCDTVC.m */; };
+		0F18B9631C67F493006C9B33 /* InformationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F18B9621C67F493006C9B33 /* InformationVC.m */; };
 		0F37A57A1C6279B30058480F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F37A5791C6279B30058480F /* main.m */; };
 		0F37A57D1C6279B30058480F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F37A57C1C6279B30058480F /* AppDelegate.m */; };
 		0F37A5801C6279B30058480F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F37A57F1C6279B30058480F /* ViewController.m */; };
-		0F37A5831C6279B30058480F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F37A5811C6279B30058480F /* Main.storyboard */; };
 		0F37A5861C6279B30058480F /* EarthquakeTracker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0F37A5841C6279B30058480F /* EarthquakeTracker.xcdatamodeld */; };
 		0F37A5881C6279B30058480F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F37A5871C6279B30058480F /* Assets.xcassets */; };
 		0F37A58B1C6279B30058480F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F37A5891C6279B30058480F /* LaunchScreen.storyboard */; };
@@ -31,6 +30,8 @@
 		0F37A5D11C62D6050058480F /* EarthquakeDataTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F37A5D01C62D6050058480F /* EarthquakeDataTVC.m */; };
 		0F37A5D41C62DD570058480F /* JustPostedEarthquakeDataTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F37A5D31C62DD570058480F /* JustPostedEarthquakeDataTVC.m */; };
 		0FAEA6D31C6649BA001724BC /* Quake+Annotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAEA6D21C6649BA001724BC /* Quake+Annotation.m */; };
+		0FAEA6D91C6685F5001724BC /* EarthquakeTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FAEA6D81C6685F5001724BC /* EarthquakeTableCell.m */; };
+		0FAEA6E01C67D643001724BC /* fontello.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FAEA6DF1C67D643001724BC /* fontello.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,8 +53,6 @@
 
 /* Begin PBXFileReference section */
 		0F0159711C63D2B100C98FAF /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		0F0159761C63ED4300C98FAF /* Annotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Annotation.h; sourceTree = "<group>"; };
-		0F0159771C63ED4300C98FAF /* Annotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Annotation.m; sourceTree = "<group>"; };
 		0F0159861C642C0900C98FAF /* Quake+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Quake+CoreDataProperties.h"; sourceTree = "<group>"; };
 		0F0159871C642C0900C98FAF /* Quake+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Quake+CoreDataProperties.m"; sourceTree = "<group>"; };
 		0F0159881C642C0900C98FAF /* Quake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Quake.h; sourceTree = "<group>"; };
@@ -63,13 +62,14 @@
 		0F0159981C651B3700C98FAF /* EarthquakeCDTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EarthquakeCDTVC.h; sourceTree = "<group>"; };
 		0F0159991C651B3700C98FAF /* EarthquakeCDTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EarthquakeCDTVC.m; sourceTree = "<group>"; };
 		0F0159A11C65440000C98FAF /* QuakeDatabaseAvailibility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuakeDatabaseAvailibility.h; sourceTree = "<group>"; };
+		0F18B9611C67F493006C9B33 /* InformationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationVC.h; sourceTree = "<group>"; };
+		0F18B9621C67F493006C9B33 /* InformationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformationVC.m; sourceTree = "<group>"; };
 		0F37A5751C6279B30058480F /* EarthquakeTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EarthquakeTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F37A5791C6279B30058480F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0F37A57B1C6279B30058480F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		0F37A57C1C6279B30058480F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		0F37A57E1C6279B30058480F /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		0F37A57F1C6279B30058480F /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		0F37A5821C6279B30058480F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0F37A5851C6279B30058480F /* EarthquakeTracker.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = EarthquakeTracker.xcdatamodel; sourceTree = "<group>"; };
 		0F37A5871C6279B30058480F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0F37A58A1C6279B30058480F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -97,7 +97,9 @@
 		0F37A5D31C62DD570058480F /* JustPostedEarthquakeDataTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JustPostedEarthquakeDataTVC.m; sourceTree = "<group>"; };
 		0FAEA6D11C6649BA001724BC /* Quake+Annotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Quake+Annotation.h"; sourceTree = "<group>"; };
 		0FAEA6D21C6649BA001724BC /* Quake+Annotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Quake+Annotation.m"; sourceTree = "<group>"; };
-		0FAEA6D41C666D53001724BC /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		0FAEA6D71C6685F5001724BC /* EarthquakeTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EarthquakeTableCell.h; sourceTree = "<group>"; };
+		0FAEA6D81C6685F5001724BC /* EarthquakeTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EarthquakeTableCell.m; sourceTree = "<group>"; };
+		0FAEA6DF1C67D643001724BC /* fontello.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fontello.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,7 +145,6 @@
 		0F37A56C1C6279B30058480F = {
 			isa = PBXGroup;
 			children = (
-				0FAEA6D41C666D53001724BC /* QuartzCore.framework */,
 				0F0159711C63D2B100C98FAF /* MapKit.framework */,
 				0F37A5771C6279B30058480F /* EarthquakeTracker */,
 				0F37A5941C6279B40058480F /* EarthquakeTrackerTests */,
@@ -165,16 +166,15 @@
 		0F37A5771C6279B30058480F /* EarthquakeTracker */ = {
 			isa = PBXGroup;
 			children = (
+				0FAEA6D61C6685AA001724BC /* UI */,
 				0F01597F1C642B7300C98FAF /* Data */,
 				0F37A5C11C6293A70058480F /* Controllers */,
 				0F37A5B81C627A5A0058480F /* API */,
 				0F37A5AE1C627A2F0058480F /* Utility */,
 				0F37A57B1C6279B30058480F /* AppDelegate.h */,
 				0F37A57C1C6279B30058480F /* AppDelegate.m */,
-				0F37A5811C6279B30058480F /* Main.storyboard */,
 				0F37A5871C6279B30058480F /* Assets.xcassets */,
 				0F37A5891C6279B30058480F /* LaunchScreen.storyboard */,
-				0F37A58C1C6279B40058480F /* Info.plist */,
 				0F37A5781C6279B30058480F /* Supporting Files */,
 				0F37A5BC1C6293560058480F /* iPhone.storyboard */,
 				0F0159A11C65440000C98FAF /* QuakeDatabaseAvailibility.h */,
@@ -185,6 +185,8 @@
 		0F37A5781C6279B30058480F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0F37A58C1C6279B40058480F /* Info.plist */,
+				0FAEA6DF1C67D643001724BC /* fontello.ttf */,
 				0F37A5791C6279B30058480F /* main.m */,
 			);
 			name = "Supporting Files";
@@ -241,14 +243,23 @@
 				0F37A5D01C62D6050058480F /* EarthquakeDataTVC.m */,
 				0F37A5D21C62DD570058480F /* JustPostedEarthquakeDataTVC.h */,
 				0F37A5D31C62DD570058480F /* JustPostedEarthquakeDataTVC.m */,
-				0F0159761C63ED4300C98FAF /* Annotation.h */,
-				0F0159771C63ED4300C98FAF /* Annotation.m */,
 				0F01598F1C6511C900C98FAF /* CoreDataTVC.h */,
 				0F0159901C6511C900C98FAF /* CoreDataTVC.m */,
 				0F0159981C651B3700C98FAF /* EarthquakeCDTVC.h */,
 				0F0159991C651B3700C98FAF /* EarthquakeCDTVC.m */,
+				0F18B9611C67F493006C9B33 /* InformationVC.h */,
+				0F18B9621C67F493006C9B33 /* InformationVC.m */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		0FAEA6D61C6685AA001724BC /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				0FAEA6D71C6685F5001724BC /* EarthquakeTableCell.h */,
+				0FAEA6D81C6685F5001724BC /* EarthquakeTableCell.m */,
+			);
+			name = UI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -361,8 +372,8 @@
 			files = (
 				0F37A58B1C6279B30058480F /* LaunchScreen.storyboard in Resources */,
 				0F37A5881C6279B30058480F /* Assets.xcassets in Resources */,
-				0F37A5831C6279B30058480F /* Main.storyboard in Resources */,
 				0F37A5BD1C6293560058480F /* iPhone.storyboard in Resources */,
+				0FAEA6E01C67D643001724BC /* fontello.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -394,10 +405,11 @@
 				0F37A5D41C62DD570058480F /* JustPostedEarthquakeDataTVC.m in Sources */,
 				0F37A5801C6279B30058480F /* ViewController.m in Sources */,
 				0F37A5C81C62A2A80058480F /* SingleEventMapVC.m in Sources */,
+				0FAEA6D91C6685F5001724BC /* EarthquakeTableCell.m in Sources */,
 				0F37A5861C6279B30058480F /* EarthquakeTracker.xcdatamodeld in Sources */,
-				0F0159781C63ED4300C98FAF /* Annotation.m in Sources */,
 				0F0159911C6511C900C98FAF /* CoreDataTVC.m in Sources */,
 				0F37A5B31C627A430058480F /* JSONUtility.m in Sources */,
+				0F18B9631C67F493006C9B33 /* InformationVC.m in Sources */,
 				0F37A5BB1C627B520058480F /* APIManager.m in Sources */,
 				0F01598A1C642C0900C98FAF /* Quake+CoreDataProperties.m in Sources */,
 				0F37A57D1C6279B30058480F /* AppDelegate.m in Sources */,
@@ -439,14 +451,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		0F37A5811C6279B30058480F /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0F37A5821C6279B30058480F /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		0F37A5891C6279B30058480F /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

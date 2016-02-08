@@ -6,7 +6,7 @@
 //  Copyright © 2016 HBB Global. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 @interface InformationVC : UIViewController
 

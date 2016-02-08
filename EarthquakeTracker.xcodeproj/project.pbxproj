@@ -13,9 +13,9 @@
 		0F0159911C6511C900C98FAF /* CoreDataTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F0159901C6511C900C98FAF /* CoreDataTVC.m */; };
 		0F01599A1C651B3700C98FAF /* EarthquakeCDTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F0159991C651B3700C98FAF /* EarthquakeCDTVC.m */; };
 		0F18B9631C67F493006C9B33 /* InformationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F18B9621C67F493006C9B33 /* InformationVC.m */; };
+		0F18B9661C67FB69006C9B33 /* WebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F18B9651C67FB69006C9B33 /* WebVC.m */; };
 		0F37A57A1C6279B30058480F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F37A5791C6279B30058480F /* main.m */; };
 		0F37A57D1C6279B30058480F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F37A57C1C6279B30058480F /* AppDelegate.m */; };
-		0F37A5801C6279B30058480F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F37A57F1C6279B30058480F /* ViewController.m */; };
 		0F37A5861C6279B30058480F /* EarthquakeTracker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0F37A5841C6279B30058480F /* EarthquakeTracker.xcdatamodeld */; };
 		0F37A5881C6279B30058480F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F37A5871C6279B30058480F /* Assets.xcassets */; };
 		0F37A58B1C6279B30058480F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F37A5891C6279B30058480F /* LaunchScreen.storyboard */; };
@@ -64,12 +64,12 @@
 		0F0159A11C65440000C98FAF /* QuakeDatabaseAvailibility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuakeDatabaseAvailibility.h; sourceTree = "<group>"; };
 		0F18B9611C67F493006C9B33 /* InformationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationVC.h; sourceTree = "<group>"; };
 		0F18B9621C67F493006C9B33 /* InformationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformationVC.m; sourceTree = "<group>"; };
+		0F18B9641C67FB69006C9B33 /* WebVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebVC.h; sourceTree = "<group>"; };
+		0F18B9651C67FB69006C9B33 /* WebVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebVC.m; sourceTree = "<group>"; };
 		0F37A5751C6279B30058480F /* EarthquakeTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EarthquakeTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F37A5791C6279B30058480F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0F37A57B1C6279B30058480F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		0F37A57C1C6279B30058480F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		0F37A57E1C6279B30058480F /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		0F37A57F1C6279B30058480F /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		0F37A5851C6279B30058480F /* EarthquakeTracker.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = EarthquakeTracker.xcdatamodel; sourceTree = "<group>"; };
 		0F37A5871C6279B30058480F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0F37A58A1C6279B30058480F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -233,8 +233,6 @@
 		0F37A5C11C6293A70058480F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				0F37A57E1C6279B30058480F /* ViewController.h */,
-				0F37A57F1C6279B30058480F /* ViewController.m */,
 				0F37A5C61C62A2A80058480F /* SingleEventMapVC.h */,
 				0F37A5C71C62A2A80058480F /* SingleEventMapVC.m */,
 				0F37A5C91C62BEE60058480F /* FullMapVC.h */,
@@ -249,6 +247,8 @@
 				0F0159991C651B3700C98FAF /* EarthquakeCDTVC.m */,
 				0F18B9611C67F493006C9B33 /* InformationVC.h */,
 				0F18B9621C67F493006C9B33 /* InformationVC.m */,
+				0F18B9641C67FB69006C9B33 /* WebVC.h */,
+				0F18B9651C67FB69006C9B33 /* WebVC.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -403,7 +403,6 @@
 				0F37A5B41C627A430058480F /* DateUtility.m in Sources */,
 				0F37A5D11C62D6050058480F /* EarthquakeDataTVC.m in Sources */,
 				0F37A5D41C62DD570058480F /* JustPostedEarthquakeDataTVC.m in Sources */,
-				0F37A5801C6279B30058480F /* ViewController.m in Sources */,
 				0F37A5C81C62A2A80058480F /* SingleEventMapVC.m in Sources */,
 				0FAEA6D91C6685F5001724BC /* EarthquakeTableCell.m in Sources */,
 				0F37A5861C6279B30058480F /* EarthquakeTracker.xcdatamodeld in Sources */,
@@ -414,6 +413,7 @@
 				0F01598A1C642C0900C98FAF /* Quake+CoreDataProperties.m in Sources */,
 				0F37A57D1C6279B30058480F /* AppDelegate.m in Sources */,
 				0F37A5CB1C62BEE60058480F /* FullMapVC.m in Sources */,
+				0F18B9661C67FB69006C9B33 /* WebVC.m in Sources */,
 				0F37A57A1C6279B30058480F /* main.m in Sources */,
 				0F01598B1C642C0900C98FAF /* Quake.m in Sources */,
 			);

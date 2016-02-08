@@ -9,8 +9,7 @@
 #import "EarthquakeCDTVC.h"
 #import "Quake.h"
 #import "QuakeDatabaseAvailibility.h"
-#import "SingleEventMapVC.h"
-#import "FullMapVC.h"
+#import "WebVC.h"
 #import "APIManager.h"
 #import "JSONUtility.h"
 #import "EarthquakeTableCell.h"
@@ -73,22 +72,20 @@
  */
 - (UIColor *)getStatusColor:(NSNumber *)magnitude {
     
-    if ([[NSNumber numberWithDouble:6.5] compare:magnitude] == NSOrderedAscending) {
+    if ([[NSNumber numberWithDouble:8.0] compare:magnitude] == NSOrderedAscending) {
         return [UIColor brownColor];
-    } else if ([[NSNumber numberWithDouble:6.1] compare:magnitude] == NSOrderedAscending) {
+    } else if ([[NSNumber numberWithDouble:7.0] compare:magnitude] == NSOrderedAscending) {
         return [UIColor colorWithRed:0.651 green:0.11 blue:0 alpha:1];
-    } else if ([[NSNumber numberWithDouble:5.5] compare:magnitude] == NSOrderedAscending) {
+    } else if ([[NSNumber numberWithDouble:6.0] compare:magnitude] == NSOrderedAscending) {
         return [UIColor redColor];
     } else if ([[NSNumber numberWithDouble:5.0]compare:magnitude] == NSOrderedAscending) {
         return [UIColor orangeColor];
-    } else if ([[NSNumber numberWithDouble:4.1]compare:magnitude] == NSOrderedAscending) {
+    } else if ([[NSNumber numberWithDouble:4.0]compare:magnitude] == NSOrderedAscending) {
         return [UIColor yellowColor];
-    } else if ([[NSNumber numberWithDouble:3.6]compare:magnitude] == NSOrderedAscending) {
-        return [UIColor greenColor];
     } else if ([[NSNumber numberWithDouble:3.0]compare:magnitude] == NSOrderedAscending) {
+        return [UIColor greenColor];
+    } else if ([[NSNumber numberWithDouble:2.5]compare:magnitude] == NSOrderedAscending) {
         return [UIColor blueColor];
-    } else if ([[NSNumber numberWithDouble:1.8]compare:magnitude] == NSOrderedAscending) {
-        return [UIColor purpleColor];
     } else {
         return [UIColor whiteColor];
     }
@@ -97,24 +94,22 @@
 
 - (NSString *)getStatusIconNumber:(NSNumber *)magnitude {
     
-    if ([[NSNumber numberWithDouble:6.5] compare:magnitude] == NSOrderedAscending) {
+    if ([[NSNumber numberWithDouble:8.0] compare:magnitude] == NSOrderedAscending) {
         return @"\ue807";
-    } else if ([[NSNumber numberWithDouble:6.1] compare:magnitude] == NSOrderedAscending) {
+    } else if ([[NSNumber numberWithDouble:7.0] compare:magnitude] == NSOrderedAscending) {
         return @"\ue808";
-    } else if ([[NSNumber numberWithDouble:5.5] compare:magnitude] == NSOrderedAscending) {
+    } else if ([[NSNumber numberWithDouble:6.0] compare:magnitude] == NSOrderedAscending) {
         return @"\ue80b";
     } else if ([[NSNumber numberWithDouble:5.0]compare:magnitude] == NSOrderedAscending) {
         return @"\ue801";
-    } else if ([[NSNumber numberWithDouble:4.1]compare:magnitude] == NSOrderedAscending) {
+    } else if ([[NSNumber numberWithDouble:4.0]compare:magnitude] == NSOrderedAscending) {
         return @"\ue80c";
-    } else if ([[NSNumber numberWithDouble:3.6]compare:magnitude] == NSOrderedAscending) {
-        return @"\ue809a";
     } else if ([[NSNumber numberWithDouble:3.0]compare:magnitude] == NSOrderedAscending) {
+        return @"\ue80a";
+    } else if ([[NSNumber numberWithDouble:2.5]compare:magnitude] == NSOrderedAscending) {
         return @"\ue809";
-    } else if ([[NSNumber numberWithDouble:1.8]compare:magnitude] == NSOrderedAscending) {
-        return @"\ue805";
     } else {
-        return @"\ue806";
+        return @"\ue805";
     }
     
 }
@@ -157,12 +152,9 @@
                 fromIndexPath:(NSIndexPath *)indexPath
 {
     Quake *quake = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    if ([vc isKindOfClass:[SingleEventMapVC class]]) {
-        SingleEventMapVC *singleEventMapVC = (SingleEventMapVC *)vc;
-        singleEventMapVC.quake = quake;
-    } else if ([vc isKindOfClass:[FullMapVC class]]) {
-        FullMapVC *fullMapVC = (FullMapVC *)vc;
-        fullMapVC.title = @"Resent Earthquakes";
+    if ([vc isKindOfClass:[WebVC class]]) {
+        WebVC *webVC = (WebVC *)vc;
+        webVC.quake = quake;
     }
     
 }

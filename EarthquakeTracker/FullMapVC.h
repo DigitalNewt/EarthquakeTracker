@@ -6,10 +6,12 @@
 //  Copyright © 2016 HBB Global. All rights reserved.
 //
 
+#import "Quake+Annotation.h"
 @import UIKit;
 
-@interface FullMapVC : UIViewController
+@interface FullMapVC : UIViewController <NSFetchedResultsControllerDelegate>
 
-@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+// The controller
+@property (weak, nonatomic) NSFetchedResultsController *fetchedResultsController;
 
 @end

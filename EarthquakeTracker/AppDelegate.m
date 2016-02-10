@@ -171,7 +171,7 @@
                 if (error) {
                     NSLog(@"Earthquake background fetch failed: %@", error.localizedDescription);
                     completionHandler(UIBackgroundFetchResultNoData);
-                    
+                    //TODO alert user no network
                     NSLog(@"%@", error);
                 } else {
                     [self stopFetchingEarthquakeData:result intoContext:self.quakeDatabaseContext];

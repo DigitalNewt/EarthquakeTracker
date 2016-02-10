@@ -10,14 +10,19 @@
 #import <CoreData/CoreData.h>
 
 NS_ASSUME_NONNULL_BEGIN
+#define QUAKE_DATABASE @"Quake"
+#define DEFAULT_SORT_ORDER @"time"
 
 @interface Quake : NSManagedObject
 
 + (Quake *)quakeWithEarthquakeInfo:(NSDictionary *)quakeDictionary
-            inManagedObjectContext:(NSManagedObjectContext *)context;
+            inManagedObjectContext:(NSManagedObjectContext *)context
+            withDateFormat:(NSDateFormatter *)dateFormatter;
 
 + (void)loadEarthquakeDataFromArray:(NSArray *)quakes  // of Quake NSDictionary
            intoManagedObjectCOntext:(NSManagedObjectContext *)context;
+
++ (NSArray *)getTopQuakes:(NSManagedObjectContext *)context;
 
 @end
 

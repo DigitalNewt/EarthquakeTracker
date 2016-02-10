@@ -7,39 +7,108 @@
 //
 
 #import "SingleEventMapVC.h"
+#import "TextToImage.h"
+#import "WebVC.h"
 @import MapKit;
 
 @interface SingleEventMapVC () <MKMapViewDelegate>
 
-@property (weak, nonatomic) IBOutlet MKMapView *singleMapView;
+@property (weak, nonatomic) IBOutlet MKMapView *mapView;
+
+@property (strong, nonatomic) TextToImage *textToImage;
 @end
 
-////Wimbledon Coordiantes
-//#define LATITUDE 51.434783;
-//#define LONGITUDE -0.213428;
 
 //Span
-#define DEFAULT_SPAN 5.0f;
+#define DEFAULT_SPAN 6.0f;
+#define REUSE_ID @"SingleEventMapVC"
 
 @implementation SingleEventMapVC
 
-- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
-    static NSString *reuseId = @"SingleEventMapVC";
+- (TextToImage *)textToImage {
+    if (!_textToImage) {
+        _textToImage = [[TextToImage alloc] init];
+    }
+    return _textToImage;
+}
+
+-(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
+    static NSString *reuseId = REUSE_ID;
     MKAnnotationView *view = [mapView dequeueReusableAnnotationViewWithIdentifier:reuseId];
     if (!view) {
         view = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseId];
         
         view.canShowCallout = YES;
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 46, 46)];
+        view.leftCalloutAccessoryView = imageView;
+        
+        UIButton *disclosureButton = [[UIButton alloc] init];
+        UIImage *disclosure = [self.textToImage convertTextToImage:DISCLOSURE withImageView:imageView withColor:[UIColor blackColor]];
+        
+        [disclosureButton setBackgroundImage:disclosure forState:UIControlStateNormal];
+        [disclosureButton sizeToFit];
+        view.rightCalloutAccessoryView = disclosureButton;
     }
-    
+
     view.annotation = annotation;
-    
     return view;
 }
 
+- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
+         [self updateLeftCalloutAccessoryViewInAnnotationView:view];
+}
+
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
+    [self performSegueWithIdentifier:WEBVC_IDENTIFIER sender:view];
+}
+
+- (void)prepareViewController:(id)vc
+                       forSeq:(NSString *)sequeIdentifer
+             toShowAnnotation:(id <MKAnnotation>)annotation {
+    Quake *quake = nil;
+    if ([annotation isKindOfClass:[Quake class]]) {
+        quake = (Quake *)annotation;
+    }
+    if (quake) {
+        if (![sequeIdentifer length] || [sequeIdentifer isEqualToString:WEBVC_IDENTIFIER]) {
+            if ([vc isKindOfClass:[WebVC class]]) {
+                WebVC *wvc = (WebVC *)vc;
+                wvc.quake = quake;
+            }
+        }
+    }
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([sender isKindOfClass:[MKAnnotationView class]]) {
+        [self prepareViewController:segue.destinationViewController
+                             forSeq:segue.identifier
+                   toShowAnnotation:((MKAnnotationView *)sender).annotation];
+    }
+}
+
+- (void)updateLeftCalloutAccessoryViewInAnnotationView:(MKAnnotationView *)annotationView
+{
+    UIImageView *imageView = nil;
+    if ([annotationView.leftCalloutAccessoryView isKindOfClass:[UIImageView class]]) {
+        imageView = (UIImageView *)annotationView.leftCalloutAccessoryView;
+    }
+    if (imageView) {
+        Quake *quake = nil;
+        if ([annotationView.annotation isKindOfClass:[Quake class]]) {
+            quake = (Quake *)annotationView.annotation;
+        }
+        if (quake) {
+            imageView.image = [self.textToImage convertNumberToImage:quake.magnitude withImageView:imageView withColor:[UIColor blackColor]];
+            [imageView setContentMode:UIViewContentModeScaleAspectFit];
+        }
+    }
+}
+
+
 - (void) updateSingleMapViewAnnotations {
     
-    [self.singleMapView removeAnnotations:self.singleMapView.annotations];
+    [self.mapView removeAnnotations:self.mapView.annotations];
     
     //Create the region
     MKCoordinateRegion earthquakeRegion;
@@ -48,54 +117,31 @@
     MKCoordinateSpan span;
     span.latitudeDelta = DEFAULT_SPAN;
     span.longitudeDelta = DEFAULT_SPAN;
-
-    CLLocationCoordinate2D earthquakeCenter;
-    earthquakeCenter.latitude = [self.quake.latitude doubleValue];
-    earthquakeCenter.longitude = [self.quake.longitude doubleValue];
     
-    earthquakeRegion.center = earthquakeCenter;
+    earthquakeRegion.center = self.quake.coordinate;
     earthquakeRegion.span = span;
-
-    NSLog(@"latitude = %@", self.quake.latitude);
-    NSLog(@"longitude = %@", self.quake.longitude);
     
     //Set mapView
-    [self.singleMapView setRegion:earthquakeRegion animated:YES];
+    [self.mapView setRegion:earthquakeRegion animated:YES];
     
-    //Create a coordiante for use with the annotation
-//    CLLocationCoordinate2D location;
-//    location.latitude = LATITUDE;
-//    location.longitude = LONGITUDE;
-//    wimbLocation.latitude = [self.quake.latitude doubleValue];;
-//    wimbLocation.longitude = [self.quake.longitude doubleValue];;
+    [self.mapView addAnnotation:self.quake];
     
-    [self.singleMapView addAnnotation:self.quake];
+    self.mapView.centerCoordinate = self.quake.coordinate;
     
-//    self.singleMapView.centerCoordinate = earthquakeCenter;
+    NSMutableArray *quakes = [NSMutableArray arrayWithCapacity:1];
     
-    
-    
-    
-    
-//    NSArray *quakes = @[self.quake];
-//    [self.singleMapView addAnnotations:quakes];
-//    [self.singleMapView showAnnotations:quakes animated:YES];
-
-//    self.singleMapView.centerCoordinate = self.quake.coordinate;
+    [self.mapView showAnnotations:quakes animated:YES];
 
 
 }
 
-- (void)setSinlgeMapView:(MKMapView *)singleMapView {
-    _singleMapView = singleMapView;
-    self.singleMapView.delegate = self;
-    [self updateSingleMapViewAnnotations];
+- (void)setMapView:(MKMapView *)mapView {
+    _mapView = mapView;
+    self.mapView.delegate = self;
 }
 
 - (void)setQuake:(Quake *)quake {
     _quake = quake;
-    self.title = quake.place;
-    [self updateSingleMapViewAnnotations];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -103,51 +149,5 @@
 
 }
 
-//- (void)viewDidLoad {
-//    [super viewDidLoad];
-//    
-//    //Create the region
-//    MKCoordinateRegion earthquakeRegion;
-//    
-//    //Center
-//    CLLocationCoordinate2D earthquakeCenter;
-////    earthquakeCenter.latitude = [self.quake.latitude doubleValue];
-////    earthquakeCenter.longitude = [self.quake.longitude doubleValue];
-//    
-//    earthquakeCenter.latitude = LATITUDE;
-//    earthquakeCenter.longitude = LONGITUDE;
-//    NSLog(@"Latatude =  %f",earthquakeCenter.latitude);
-//    NSLog(@"Longitude =  %f",earthquakeCenter.longitude);
-//    
-//    
-//    //Span
-//    MKCoordinateSpan span;
-//    span.latitudeDelta = DEFAULT_SPAN;
-//    span.longitudeDelta = DEFAULT_SPAN;
-//    
-//    earthquakeRegion.center = earthquakeCenter;
-//    earthquakeRegion.span = span;
-//    
-//    //Set mapView
-//    [self.singleMapView setRegion:earthquakeRegion animated:YES];
-//    
-//    //Create a coordiante for use with the annotation
-//    CLLocationCoordinate2D wimbLocation;
-//    wimbLocation.latitude = LATITUDE;
-//    wimbLocation.longitude = LONGITUDE;
-////    wimbLocation.latitude = [self.quake.latitude doubleValue];;
-////    wimbLocation.longitude = [self.quake.longitude doubleValue];;
-//    
-//    Annotation * myAnnotation = [Annotation alloc];
-//    myAnnotation.coordinate = wimbLocation;
-//    myAnnotation.title = @"Dude";
-//    myAnnotation.subtitle = @"This is cool!!";
-//
-//    
-//    [self.singleMapView addAnnotation:myAnnotation];
-//    
-//    
-//    
-//}
 
 @end

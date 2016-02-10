@@ -61,12 +61,14 @@ NSString *const kQuery = @"query";
     NSString *format = @"geojson";
     NSString *eventtype = @"earthquake";
     NSString *jsonerror = @"true";
+    NSString *minmagnitude = @"2.5";
     
     NSDictionary *queryData = @{@"limit":limit,
                                 @"eventtype":eventtype,
                                 @"orderby":orderby,
                                 @"format":format,
-                                @"jsonerror":jsonerror};
+                                @"jsonerror":jsonerror,
+                                @"minmagnitude": minmagnitude};
 
     return queryData;
 }

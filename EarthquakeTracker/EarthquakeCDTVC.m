@@ -10,41 +10,50 @@
 #import "Quake.h"
 #import "QuakeDatabaseAvailibility.h"
 #import "WebVC.h"
+#import "SingleEventMapVC.h"
 #import "APIManager.h"
 #import "JSONUtility.h"
 #import "EarthquakeTableCell.h"
+#import "DateFormats.h"
+#import "FontelloIcons.h"
+#import "MagnitudeUtilities.h"
 
 @interface EarthquakeCDTVC ()
 {
     UIRefreshControl *refreshControl;
 }
-
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
 @property (nonatomic, strong) UIFont *quakeFonts;
+@property (nonatomic, strong) NSNumberFormatter *numberFormatter;
 
 @end
 
 @implementation EarthquakeCDTVC
 
 
-- (UIFont *)quakeFonts
-{
-    if (_quakeFonts == nil) {
-        _quakeFonts = [UIFont fontWithName:@"fontello" size:14.0];
-    }
-    return _quakeFonts;
-}
-
-- (NSDateFormatter *)dateFormatter
-{
+- (NSDateFormatter *)dateFormatter {
     if (!_dateFormatter) {
         _dateFormatter = [[NSDateFormatter alloc] init];
     }
     return _dateFormatter;
 }
 
-- (void)awakeFromNib
-{
+- (UIFont *)quakeFonts {
+    if (_quakeFonts == nil) {
+        _quakeFonts = [UIFont fontWithName:@"fontello" size:14.0];
+    }
+    return _quakeFonts;
+}
+
+
+- (NSNumberFormatter *)numberFormatter {
+    if (!_numberFormatter) {
+        _numberFormatter = [[NSNumberFormatter alloc] init];
+    }
+    return _numberFormatter;
+}
+
+- (void)awakeFromNib {
         [[NSNotificationCenter defaultCenter] addObserverForName:QUAKE_DATABASE_AVAILIBILITY_NOTIFICATION
                                                           object:nil
                                                            queue:nil
@@ -56,10 +65,10 @@
 - (void)setManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
     _managedObjectContext = managedObjectContext;
     
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Quake"];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:QUAKE_DATABASE];
     
     request.predicate = nil;
-    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"time" ascending:NO]];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:DEFAULT_SORT_ORDER ascending:NO]];
     
     self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
                                                                         managedObjectContext:managedObjectContext
@@ -67,86 +76,42 @@
                                                                                    cacheName:nil];
 }
 
-/**
- * Return UIColor for magnitude level.
- */
-- (UIColor *)getStatusColor:(NSNumber *)magnitude {
-    
-    if ([[NSNumber numberWithDouble:8.0] compare:magnitude] == NSOrderedAscending) {
-        return [UIColor brownColor];
-    } else if ([[NSNumber numberWithDouble:7.0] compare:magnitude] == NSOrderedAscending) {
-        return [UIColor colorWithRed:0.651 green:0.11 blue:0 alpha:1];
-    } else if ([[NSNumber numberWithDouble:6.0] compare:magnitude] == NSOrderedAscending) {
-        return [UIColor redColor];
-    } else if ([[NSNumber numberWithDouble:5.0]compare:magnitude] == NSOrderedAscending) {
-        return [UIColor orangeColor];
-    } else if ([[NSNumber numberWithDouble:4.0]compare:magnitude] == NSOrderedAscending) {
-        return [UIColor yellowColor];
-    } else if ([[NSNumber numberWithDouble:3.0]compare:magnitude] == NSOrderedAscending) {
-        return [UIColor greenColor];
-    } else if ([[NSNumber numberWithDouble:2.5]compare:magnitude] == NSOrderedAscending) {
-        return [UIColor blueColor];
-    } else {
-        return [UIColor whiteColor];
-    }
-
-}
-
-- (NSString *)getStatusIconNumber:(NSNumber *)magnitude {
-    
-    if ([[NSNumber numberWithDouble:8.0] compare:magnitude] == NSOrderedAscending) {
-        return @"\ue807";
-    } else if ([[NSNumber numberWithDouble:7.0] compare:magnitude] == NSOrderedAscending) {
-        return @"\ue808";
-    } else if ([[NSNumber numberWithDouble:6.0] compare:magnitude] == NSOrderedAscending) {
-        return @"\ue80b";
-    } else if ([[NSNumber numberWithDouble:5.0]compare:magnitude] == NSOrderedAscending) {
-        return @"\ue801";
-    } else if ([[NSNumber numberWithDouble:4.0]compare:magnitude] == NSOrderedAscending) {
-        return @"\ue80c";
-    } else if ([[NSNumber numberWithDouble:3.0]compare:magnitude] == NSOrderedAscending) {
-        return @"\ue80a";
-    } else if ([[NSNumber numberWithDouble:2.5]compare:magnitude] == NSOrderedAscending) {
-        return @"\ue809";
-    } else {
-        return @"\ue805";
-    }
-    
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellIdentifier = @"Earthquake Data Cell";
     EarthquakeTableCell *customCell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
-    Quake *quake = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    Quake *quake = (Quake *)[self.fetchedResultsController objectAtIndexPath:indexPath];
     
-    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
-    formatter.numberStyle = NSNumberFormatterDecimalStyle;
+    self.numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
     
-    customCell.magnitude.text = [formatter stringFromNumber:quake.magnitude];
+    customCell.magnitude.text = [self.numberFormatter stringFromNumber:quake.magnitude];
     customCell.customTitle.text = quake.place;
     
-    [self.dateFormatter setDateFormat:@"E  MM/dd/yyyy"];
+    [self.dateFormatter setDateFormat:DEFAULT_DATA_FORMAT];
     
     customCell.dateLabel.text = [self.dateFormatter stringFromDate:quake.time];
     customCell.dateIcon.font = self.quakeFonts;
-    customCell.dateIcon.text = @"\ue802";
+    customCell.dateIcon.text = DATE_ICON;
     customCell.timeIcon.font = self.quakeFonts;
-    customCell.timeIcon.text = @"\ue803";
+    customCell.timeIcon.text = TIME_ICON;
     
-    [self.dateFormatter setDateFormat:@"hh:mm a"];
+    [self.dateFormatter setDateFormat:DEFAULT_TIME_FORMAT];
     customCell.timeLabel.text = [self.dateFormatter stringFromDate:quake.time];
     
     customCell.statusIcon.font = self.quakeFonts;
-    customCell.statusIcon.text = [self getStatusIconNumber:quake.magnitude];
     
-    customCell.statusColor.backgroundColor = [self getStatusColor:quake.magnitude];
+    customCell.statusIcon.text = [MagnitudeUtilities getStatusIconNumber:quake.magnitude];
+    
+    customCell.statusColor.backgroundColor = [MagnitudeUtilities getStatusColor:quake.magnitude];
     return customCell;
 }
 
 #pragma mark - Navigation
 
+/**
+ * Determine which controller class is getting called and set properties needed for segue.
+ */
 - (void)prepareViewController:(id)vc
                      forSegue:(NSString *)segueIdentifer
                 fromIndexPath:(NSIndexPath *)indexPath
@@ -155,11 +120,13 @@
     if ([vc isKindOfClass:[WebVC class]]) {
         WebVC *webVC = (WebVC *)vc;
         webVC.quake = quake;
+    } else if ([vc isKindOfClass:[SingleEventMapVC class]]) {
+        SingleEventMapVC * singleEventMapVC = (SingleEventMapVC *)vc;
+        singleEventMapVC.quake = quake;        
     }
-    
 }
 
-// boilerplate
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue
                  sender:(id)sender
 {
@@ -172,7 +139,7 @@
                   fromIndexPath:indexPath];
 }
 
-// boilerplate
+
 - (void)tableView:(UITableView *)tableView
 didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -206,9 +173,8 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 - (void)fetchEarthquakeData:(id)sender {
     
     NSString *limit = @"20";
-    NSString *orderby = @"time";
     
-    NSDictionary *queryData = [APIManager constructQuery:limit withOrder: orderby];
+    NSDictionary *queryData = [APIManager constructQuery:limit withOrder: DEFAULT_SORT_ORDER];
     
     [APIManager requestHTTPGet:queryData withAction:kQuery onCompletion: ^(NSString *result, NSError *error){
         dispatch_async(dispatch_get_main_queue(), ^{

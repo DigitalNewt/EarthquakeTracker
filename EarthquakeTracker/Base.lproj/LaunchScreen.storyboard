@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -18,38 +17,38 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="globe" translatesAutoresizingMaskIntoConstraints="NO" id="cFN-Q8-9h2">
-                                <rect key="frame" x="37" y="233" width="300" height="300"/>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Earthquake" textAlignment="center" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WeX-vb-oJ3">
-                                <rect key="frame" x="70" y="153" width="235" height="44"/>
-                                <fontDescription key="fontDescription" name="SnellRoundhand-Black" family="Snell Roundhand" pointSize="30"/>
+                                <rect key="frame" x="81" y="97" width="213.5" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="Mzl-Xp-d8J"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Papyrus" family="Papyrus" pointSize="40"/>
                                 <color key="textColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tracker" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zW1-Ca-h59">
-                                <rect key="frame" x="70" y="186" width="235" height="39"/>
+                                <rect key="frame" x="120" y="149" width="134.5" height="44"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="39" id="Inl-h2-QJ3"/>
+                                    <constraint firstAttribute="height" constant="44" id="Inl-h2-QJ3"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="SnellRoundhand-Black" family="Snell Roundhand" pointSize="30"/>
+                                <fontDescription key="fontDescription" name="Papyrus" family="Papyrus" pointSize="40"/>
                                 <color key="textColor" red="0.11271025279999999" green="1" blue="0.14752967319999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="globe" translatesAutoresizingMaskIntoConstraints="NO" id="cFN-Q8-9h2">
+                                <rect key="frame" x="37" y="184" width="300" height="399"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="zW1-Ca-h59" firstAttribute="trailing" secondItem="WeX-vb-oJ3" secondAttribute="trailing" id="BxC-Sw-TJd"/>
-                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="cFN-Q8-9h2" secondAttribute="bottom" constant="134" id="NZa-SF-cmc"/>
-                            <constraint firstItem="zW1-Ca-h59" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="166" id="PfP-cK-XHv"/>
-                            <constraint firstItem="cFN-Q8-9h2" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="21" id="PuN-kh-fQ3"/>
-                            <constraint firstItem="cFN-Q8-9h2" firstAttribute="top" secondItem="zW1-Ca-h59" secondAttribute="bottom" constant="8" symbolic="YES" id="R2N-sJ-W27"/>
-                            <constraint firstItem="cFN-Q8-9h2" firstAttribute="top" secondItem="WeX-vb-oJ3" secondAttribute="bottom" constant="36" id="Rwn-FK-3jj"/>
-                            <constraint firstItem="cFN-Q8-9h2" firstAttribute="centerX" secondItem="zW1-Ca-h59" secondAttribute="centerX" id="ZWm-tu-fM6"/>
-                            <constraint firstItem="zW1-Ca-h59" firstAttribute="leading" secondItem="WeX-vb-oJ3" secondAttribute="leading" id="bGh-jb-gBF"/>
-                            <constraint firstItem="WeX-vb-oJ3" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="133" id="j08-8Q-1Oz"/>
-                            <constraint firstItem="cFN-Q8-9h2" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="lEY-40-JA6"/>
-                            <constraint firstItem="WeX-vb-oJ3" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="54" id="vQV-aA-1s5"/>
+                            <constraint firstItem="zW1-Ca-h59" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="18J-C0-t05"/>
+                            <constraint firstItem="WeX-vb-oJ3" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="77" id="4Zx-9L-65U"/>
+                            <constraint firstItem="cFN-Q8-9h2" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="37" id="UMa-v2-XxB"/>
+                            <constraint firstItem="WeX-vb-oJ3" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="cvz-P0-kEH"/>
+                            <constraint firstItem="cFN-Q8-9h2" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="50" id="gag-8F-bRg"/>
+                            <constraint firstAttribute="trailing" secondItem="cFN-Q8-9h2" secondAttribute="trailing" constant="38" id="lCs-41-VA7"/>
+                            <constraint firstItem="zW1-Ca-h59" firstAttribute="top" secondItem="WeX-vb-oJ3" secondAttribute="bottom" constant="8" id="sdk-L5-GC5"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="cFN-Q8-9h2" secondAttribute="bottom" constant="84" id="vek-x3-OWp"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>

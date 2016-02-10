@@ -11,9 +11,11 @@
 
 @interface WebVC : UIViewController <UIWebViewDelegate>
 
-@property (strong, nonatomic) IBOutlet UIWebView *webView;
-@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+#define WEBVC_IDENTIFIER @"Show Web"
 
-@property (nonatomic, strong) Quake *quake;
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+
+@property (nonatomic, weak) Quake *quake;
 
 @end

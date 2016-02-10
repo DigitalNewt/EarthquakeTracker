@@ -18,12 +18,13 @@
 - (void) viewDidLoad {
     [super viewDidLoad];
     self.webView.delegate = self;
+    self.webView.scalesPageToFit = YES;
 
     NSURL *url = [NSURL URLWithString:self.quake.detailURL];
     
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
-    [_webView loadRequest:request];
+    [self.webView loadRequest:request];
 }
 
 

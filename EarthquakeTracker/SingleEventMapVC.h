@@ -10,7 +10,6 @@
 @import UIKit;
 
 @interface SingleEventMapVC : UIViewController
-
-@property (nonatomic, strong) Quake *quake;
+@property (nonatomic, weak) Quake *quake;
 
 @end

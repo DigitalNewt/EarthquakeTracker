@@ -2,7 +2,7 @@
 //  Quake+CoreDataProperties.h
 //  EarthquakeTracker
 //
-//  Created by Brent Baker on 2/7/16.
+//  Created by Brent Baker on 2/10/16.
 //  Copyright © 2016 HBB Global. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -21,9 +21,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSDecimalNumber *latitude;
 @property (nullable, nonatomic, retain) NSDecimalNumber *longitude;
 @property (nullable, nonatomic, retain) NSDecimalNumber *magnitude;
-@property (nullable, nonatomic, retain) NSString *place;
 @property (nullable, nonatomic, retain) NSDate *time;
 @property (nullable, nonatomic, retain) NSNumber *tsunami;
+@property (nullable, nonatomic, retain) NSString *title;
+@property (nullable, nonatomic, retain) NSString *subtitle;
+@property (nullable, nonatomic, retain) NSString *place;
 
 @end
 

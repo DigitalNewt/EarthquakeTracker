@@ -40,7 +40,7 @@
 
 - (UIFont *)quakeFonts {
     if (_quakeFonts == nil) {
-        _quakeFonts = [UIFont fontWithName:@"fontello" size:14.0];
+        _quakeFonts = [UIFont fontWithName:FONTELLO_FILE size:14.0];
     }
     return _quakeFonts;
 }

@@ -9,6 +9,7 @@
 #ifndef FontelloIcons_h
 #define FontelloIcons_h
 
+#define FONTELLO_FILE @"fontello"
 #define DATE_ICON @"\ue802"
 #define TIME_ICON @"\ue803"
 #define HAPPY_ICON @"\ue805"

@@ -17,19 +17,22 @@
 #import "DateFormats.h"
 #import "FontelloIcons.h"
 #import "MagnitudeUtilities.h"
+#import "AlertUtility.h"
 
 @interface EarthquakeCDTVC ()
 {
     UIRefreshControl *refreshControl;
 }
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
-@property (nonatomic, strong) UIFont *quakeFonts;
+@property (nonatomic, strong) UIFont *quakeFont;
+@property (nonatomic, strong) UIFont *buttonFont;
 @property (nonatomic, strong) NSNumberFormatter *numberFormatter;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *fullMapButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *infoButton;
 
 @end
 
 @implementation EarthquakeCDTVC
-
 
 - (NSDateFormatter *)dateFormatter {
     if (!_dateFormatter) {
@@ -38,13 +41,19 @@
     return _dateFormatter;
 }
 
-- (UIFont *)quakeFonts {
-    if (_quakeFonts == nil) {
-        _quakeFonts = [UIFont fontWithName:FONTELLO_FILE size:14.0];
+- (UIFont *)quakeFont {
+    if (_quakeFont == nil) {
+        _quakeFont = [UIFont fontWithName:FONTELLO_FILE size:14.0];
     }
-    return _quakeFonts;
+    return _quakeFont;
 }
 
+- (UIFont *)buttonFont {
+    if (_buttonFont == nil) {
+        _buttonFont = [UIFont fontWithName:FONTELLO_FILE size:25.0];
+    }
+    return _buttonFont;
+}
 
 - (NSNumberFormatter *)numberFormatter {
     if (!_numberFormatter) {
@@ -91,19 +100,30 @@
     [self.dateFormatter setDateFormat:DEFAULT_DATA_FORMAT];
     
     customCell.dateLabel.text = [self.dateFormatter stringFromDate:quake.time];
-    customCell.dateIcon.font = self.quakeFonts;
+    customCell.dateIcon.font = self.quakeFont;
     customCell.dateIcon.text = DATE_ICON;
-    customCell.timeIcon.font = self.quakeFonts;
+    customCell.timeIcon.font = self.quakeFont;
     customCell.timeIcon.text = TIME_ICON;
     
     [self.dateFormatter setDateFormat:DEFAULT_TIME_FORMAT];
     customCell.timeLabel.text = [self.dateFormatter stringFromDate:quake.time];
     
-    customCell.statusIcon.font = self.quakeFonts;
+    customCell.statusIcon.font = self.quakeFont;
     
     customCell.statusIcon.text = [MagnitudeUtilities getStatusIconNumber:quake.magnitude];
     
     customCell.statusColor.backgroundColor = [MagnitudeUtilities getStatusColor:quake.magnitude];
+    
+    if (quake.tsunami) {
+        customCell.waveIconLabel.hidden = false;
+        customCell.tsunamiLabel.hidden = false;
+        customCell.waveIconLabel.font = self.quakeFont;
+        customCell.waveIconLabel.text = WAVE_ICON;
+        customCell.waveIconLabel.textColor = [UIColor blueColor];
+    } else {
+        customCell.waveIconLabel.hidden = true;
+        customCell.tsunamiLabel.hidden = true;
+    }
     return customCell;
 }
 
@@ -159,6 +179,17 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     self.navigationController.navigationBar.translucent = YES;
     self.navigationController.navigationBar.opaque = YES;
     self.navigationController.navigationBar.backgroundColor = [UIColor brownColor];
+    [self.fullMapButton setTitleTextAttributes:@{
+                                                 NSFontAttributeName: self.buttonFont,
+                                                 NSForegroundColorAttributeName: [UIColor grayColor]
+                                                 } forState:UIControlStateNormal];
+    self.fullMapButton.title = GLOBE_ICON;
+    
+    [self.infoButton setTitleTextAttributes:@{
+                                                 NSFontAttributeName: self.buttonFont,
+                                                 NSForegroundColorAttributeName: [UIColor grayColor]
+                                                 } forState:UIControlStateNormal];
+    self.infoButton.title = INFO_ICON;
     
     refreshControl = [[UIRefreshControl alloc]init];
     [refreshControl addTarget:self action:@selector(fetchEarthquakeData:) forControlEvents:UIControlEventValueChanged];
@@ -181,13 +212,14 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
             if (error) {
                 NSLog(@"Failed to query earthquake data.  ");
                 NSLog(@"%@", error);
+                [AlertUtility showMessage:NETWORK_ERROR_MESSAGE withTitle:NETWORK_ERROR_TITLE];
             } else {
                 NSDictionary *results = [JSONUtility getDictionaryFromJSON:result];
                 NSArray *earthquakes = [results objectForKey:EARTHQUAKE_FEATURES];
                 [Quake loadEarthquakeDataFromArray:earthquakes intoManagedObjectCOntext:self.managedObjectContext];                
                 [self.tableView reloadData];
-                [(UIRefreshControl *)sender endRefreshing];
             }
+            [(UIRefreshControl *)sender endRefreshing];
         });
     }];
 }

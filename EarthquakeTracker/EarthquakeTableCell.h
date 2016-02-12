@@ -24,5 +24,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *timeIcon;
 
 @property (strong, nonatomic) IBOutlet UILabel *statusIcon;
+@property (weak, nonatomic) IBOutlet UILabel *waveIconLabel;
+@property (weak, nonatomic) IBOutlet UILabel *tsunamiLabel;
 
 @end

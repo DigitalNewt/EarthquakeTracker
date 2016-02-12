@@ -9,6 +9,7 @@
 #import "SingleEventMapVC.h"
 #import "TextToImage.h"
 #import "WebVC.h"
+#import "MagnitudeUtilities.h"
 @import MapKit;
 
 @interface SingleEventMapVC () <MKMapViewDelegate>
@@ -55,7 +56,7 @@
 }
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
-         [self updateLeftCalloutAccessoryViewInAnnotationView:view];
+        [self updateLeftCalloutAccessoryViewInAnnotationView:view];
 }
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
@@ -87,6 +88,7 @@
     }
 }
 
+
 - (void)updateLeftCalloutAccessoryViewInAnnotationView:(MKAnnotationView *)annotationView
 {
     UIImageView *imageView = nil;
@@ -99,8 +101,10 @@
             quake = (Quake *)annotationView.annotation;
         }
         if (quake) {
-            imageView.image = [self.textToImage convertNumberToImage:quake.magnitude withImageView:imageView withColor:[UIColor blackColor]];
-            [imageView setContentMode:UIViewContentModeScaleAspectFit];
+            UIColor *fontColor = [MagnitudeUtilities getFontStatusColor:quake.magnitude];
+            UIColor *backgroundColor = [MagnitudeUtilities getStatusColor:quake.magnitude];
+            imageView.image = [self.textToImage convertNumberToImage:quake.magnitude withImageView:imageView withTextColor:fontColor withBackgroundColor:backgroundColor];
+            [imageView setContentMode:UIViewContentModeScaleAspectFill];
         }
     }
 }

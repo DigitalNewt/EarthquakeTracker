@@ -17,6 +17,8 @@
 #define EARTHQUAKE_MAGNITUDE @"properties.mag"
 #define EARTHQUAKE_PLACE @"properties.place"
 #define EARTHQUAKE_FEATURES @"features"
+#define BACKGROUND_QUAKE_FETCH_LIMIT @"1000"
+#define BACKGROUND_QUAKE_FETCH_ORDERBY @"time"
 
 extern NSString *const kQuery;
 
@@ -27,7 +29,4 @@ typedef void(^RequestCompletionHandler) (NSString*, NSError*);
 + (NSDictionary *)constructQuery:(NSString *)limit withOrder: (NSString *) orderby;
 
 + (void)requestHTTPGet:(NSDictionary *)userData withAction:(NSString *)action onCompletion:(RequestCompletionHandler)complete;
-
-+ (void)sendHTTPGet:(NSDictionary *)userData withAction:(NSString *)action onCompletion:(RequestCompletionHandler)complete;
-
 @end

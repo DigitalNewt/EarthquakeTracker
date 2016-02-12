@@ -33,15 +33,17 @@
     return image;
 }
 
-- (UIImage *)convertNumberToImage:(NSNumber *)number withImageView:(UIImageView *) imageView withColor:(UIColor *)color {
+- (UIImage *)convertNumberToImage:(NSNumber *)number
+                    withImageView:(UIImageView *) imageView
+                    withTextColor:(UIColor *)textColor withBackgroundColor:(UIColor *)backgroundColor{
     
     self.numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
     
     NSString *string = [NSString stringWithFormat:@"%@", [self.numberFormatter stringFromNumber:number]];
     
     NSDictionary *attributes = @{NSFontAttributeName            : [UIFont systemFontOfSize:22],
-                                 NSForegroundColorAttributeName : color,
-                                 NSBackgroundColorAttributeName : [UIColor yellowColor]};
+                                 NSForegroundColorAttributeName : textColor,
+                                 NSBackgroundColorAttributeName : backgroundColor};
     
     UIImage *image = [self imageFromString:string attributes:attributes size:imageView.bounds.size];
     

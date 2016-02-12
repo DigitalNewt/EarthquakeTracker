@@ -7,6 +7,7 @@
 //
 
 #import "WebVC.h"
+#import "AlertUtility.h"
 
 @implementation WebVC
 
@@ -42,6 +43,8 @@
     
     [self.activityIndicator removeFromSuperview];
     NSLog(@"Error for WEBVIEW: %@", [error description]);
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    [AlertUtility showMessage:NETWORK_ERROR_MESSAGE withTitle:NETWORK_ERROR_TITLE];
 }
 
 

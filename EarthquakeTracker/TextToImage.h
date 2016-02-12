@@ -12,8 +12,12 @@
 
 #define DISCLOSURE @"  >"
 
-- (UIImage *)convertNumberToImage:(NSNumber *)number withImageView:(UIImageView *) imageView withColor:(UIColor *)color;
+- (UIImage *)convertNumberToImage:(NSNumber *)number
+                    withImageView:(UIImageView *) imageView
+                    withTextColor:(UIColor *)textColor withBackgroundColor:(UIColor *)backgroundColor;
 
-- (UIImage *)convertTextToImage:(NSString *)text withImageView:(UIImageView *) imageView withColor:(UIColor *)color;
+- (UIImage *)convertTextToImage:(NSString *)text
+                  withImageView:(UIImageView *) imageView
+                      withColor:(UIColor *)color;
 
 @end

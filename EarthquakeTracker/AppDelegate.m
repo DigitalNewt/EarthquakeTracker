@@ -11,9 +11,7 @@
 #import "Quake.h"
 #import "JSONUtility.h"
 #import "QuakeDatabaseAvailibility.h"
-
-#define BACKGROUND_QUAKE_FETCH_LIMIT @"1000"
-#define BACKGROUND_QUAKE_FETCH_ORDERBY @"time"
+#import "AlertUtility.h"
 
 @interface AppDelegate ()
 @property (strong, nonatomic) NSManagedObjectContext *quakeDatabaseContext;
@@ -39,7 +37,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (error) {
                     NSLog(@"Earthquake background fetch failed: %@", error.localizedDescription);
-                    completionHandler(UIBackgroundFetchResultNoData);
+                    [AlertUtility showMessage:NETWORK_ERROR_MESSAGE withTitle:NETWORK_ERROR_TITLE];
                     
                     NSLog(@"%@", error);
                 } else {
@@ -170,8 +168,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (error) {
                     NSLog(@"Earthquake background fetch failed: %@", error.localizedDescription);
-                    completionHandler(UIBackgroundFetchResultNoData);
-                    //TODO alert user no network
+                    [AlertUtility showMessage:NETWORK_ERROR_MESSAGE withTitle:NETWORK_ERROR_TITLE];
                     NSLog(@"%@", error);
                 } else {
                     [self stopFetchingEarthquakeData:result intoContext:self.quakeDatabaseContext];

@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 #import "WebVC.h"
 #import "TextToImage.h"
+#import "MagnitudeUtilities.h"
 @import MapKit;
 
 @interface FullMapVC () <MKMapViewDelegate>
@@ -98,14 +99,16 @@
             quake = (Quake *)annotationView.annotation;
         }
         if (quake) {
-            imageView.image = [self.textToImage convertNumberToImage:quake.magnitude withImageView:imageView withColor:[UIColor blackColor]];
+            UIColor *fontColor = [MagnitudeUtilities getFontStatusColor:quake.magnitude];
+            UIColor *backgroundColor = [MagnitudeUtilities getStatusColor:quake.magnitude];
+            imageView.image = [self.textToImage convertNumberToImage:quake.magnitude withImageView:imageView withTextColor:fontColor withBackgroundColor:backgroundColor];
             [imageView setContentMode:UIViewContentModeScaleAspectFit];
         }
     }
 }
 
 
-- (void) updateFullMapViewAnnotations {
+- (void)updateFullMapViewAnnotations {
     
     [self.mapView removeAnnotations:self.mapView.annotations];
     [self.mapView addAnnotations:self.latestEarthquakes];

@@ -40,19 +40,9 @@
 + (UIColor *)getFontStatusColor:(NSNumber *)magnitude {
     
     if ([[NSNumber numberWithDouble:8.0] compare:magnitude] == NSOrderedAscending) {
-        return [UIColor brownColor];
-    } else if ([[NSNumber numberWithDouble:7.0] compare:magnitude] == NSOrderedAscending) {
         return [UIColor redColor];
-    } else if ([[NSNumber numberWithDouble:6.0] compare:magnitude] == NSOrderedAscending) {
-        return [UIColor orangeColor];
-    } else if ([[NSNumber numberWithDouble:5.0]compare:magnitude] == NSOrderedAscending) {
-        return [UIColor yellowColor];
-    } else if ([[NSNumber numberWithDouble:4.0]compare:magnitude] == NSOrderedAscending) {
-        return [UIColor greenColor];
-    } else if ([[NSNumber numberWithDouble:3.0]compare:magnitude] == NSOrderedAscending) {
-        return [UIColor blueColor];
     } else {
-        return [UIColor whiteColor];
+        return [UIColor blackColor];
     }
 }
 

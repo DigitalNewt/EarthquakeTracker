@@ -61,7 +61,7 @@ NSString *const kQuery = @"query";
     NSString *format = @"geojson";
     NSString *eventtype = @"earthquake";
     NSString *jsonerror = @"true";
-    NSString *minmagnitude = @"2.5";
+    NSString *minmagnitude = @"2.0";
     
     NSDictionary *queryData = @{@"limit":limit,
                                 @"eventtype":eventtype,
@@ -96,39 +96,10 @@ NSString *const kQuery = @"query";
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
                                NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
                                if (complete) {
-                                   [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
                                    complete(result, connectionError);
                                }
+                               [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
                            }];
-}
-
-/*
- * HTTP Get Request
- * @returns Dictionary with results.
- */
-+ (void)sendHTTPGet:(NSDictionary *)queryData withAction:(NSString *)action onCompletion:(RequestCompletionHandler)complete
-{
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    
-    NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
-//    defaultConfigObject.timeoutIntervalForRequest = 50;
-    NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration:defaultConfigObject
-                                                                 delegate:nil
-                                                            delegateQueue:[NSOperationQueue mainQueue]];
-    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",rootURL, action, [self toURL:queryData]]];
-    
-    NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithURL:url
-                                                    completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        if(error == nil)
-        {
-            NSString * text = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
-            NSLog(@"Data = %@",text);
-        }
-        
-    }];
-    
-    [dataTask resume];
-    
 }
 
 @end

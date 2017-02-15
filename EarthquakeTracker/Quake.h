@@ -6,8 +6,8 @@
 //  Copyright © 2016 HBB Global. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
+@import Foundation;
+@import CoreData;
 
 NS_ASSUME_NONNULL_BEGIN
 #define QUAKE_DATABASE @"Quake"

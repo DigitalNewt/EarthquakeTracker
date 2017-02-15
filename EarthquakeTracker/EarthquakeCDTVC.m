@@ -34,6 +34,7 @@
 
 @implementation EarthquakeCDTVC
 
+
 - (NSDateFormatter *)dateFormatter {
     if (!_dateFormatter) {
         _dateFormatter = [[NSDateFormatter alloc] init];
@@ -76,12 +77,15 @@
     
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:QUAKE_DATABASE];
     
+    NSSortDescriptor *sortDescriptor1 = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO];
+    NSSortDescriptor *sortDescriptor2 = [[NSSortDescriptor alloc] initWithKey:DEFAULT_SORT_ORDER ascending:NO];
+
     request.predicate = nil;
-    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:DEFAULT_SORT_ORDER ascending:NO]];
+    request.sortDescriptors = [NSArray arrayWithObjects:sortDescriptor1, sortDescriptor2, nil];
     
     self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
                                                                         managedObjectContext:managedObjectContext
-                                                                          sectionNameKeyPath:nil
+                                                                          sectionNameKeyPath:@"date"
                                                                                    cacheName:nil];
 }
 
@@ -99,9 +103,6 @@
     
     [self.dateFormatter setDateFormat:DEFAULT_DATA_FORMAT];
     
-    customCell.dateLabel.text = [self.dateFormatter stringFromDate:quake.time];
-    customCell.dateIcon.font = self.quakeFont;
-    customCell.dateIcon.text = DATE_ICON;
     customCell.timeIcon.font = self.quakeFont;
     customCell.timeIcon.text = TIME_ICON;
     
@@ -125,6 +126,35 @@
         customCell.tsunamiLabel.hidden = true;
     }
     return customCell;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
+    // create the parent view that will hold header Label
+    UIView* customView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 200.0, 88.0)];
+    customView.backgroundColor = [UIColor lightGrayColor];
+    
+    // create the button object
+    UILabel * dateLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    //headerLabel.backgroundColor = [UIColor grayColor];
+    dateLabel.opaque = NO;
+    dateLabel.textColor = [UIColor blackColor];
+    dateLabel.highlightedTextColor = [UIColor whiteColor];
+    dateLabel.font = [UIFont boldSystemFontOfSize:16];
+    dateLabel.numberOfLines = 0;
+    dateLabel.textAlignment = NSTextAlignmentLeft;
+    
+    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+    Quake *quake = sectionInfo.objects[0];
+    [self.dateFormatter setDateFormat:@" E, LLLL d yyyy"];
+    
+    NSString *diaplayDate = [self.dateFormatter stringFromDate:quake.time];
+    dateLabel.text = diaplayDate;
+    dateLabel.frame = CGRectMake(0.0, 0.0, 200.0, 24.0);
+    [customView addSubview:dateLabel];
+    
+    return customView;
+    
 }
 
 #pragma mark - Navigation
@@ -160,8 +190,7 @@
 }
 
 
-- (void)tableView:(UITableView *)tableView
-didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     id detailvc = [self.splitViewController.viewControllers lastObject];
     if ([detailvc isKindOfClass:[UINavigationController class]]) {
@@ -178,7 +207,8 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     
     self.navigationController.navigationBar.translucent = YES;
     self.navigationController.navigationBar.opaque = YES;
-    self.navigationController.navigationBar.backgroundColor = [UIColor brownColor];
+//    self.navigationController.navigationBar.backgroundColor = [UIColor brownColor];
+    self.navigationController.navigationBar.alpha = 1;
     [self.fullMapButton setTitleTextAttributes:@{
                                                  NSFontAttributeName: self.buttonFont,
                                                  NSForegroundColorAttributeName: [UIColor grayColor]

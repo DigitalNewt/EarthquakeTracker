@@ -13,6 +13,20 @@
 
 @implementation Quake
 
++(NSDate *) setTimeToZero:(NSDate *)myDate
+{
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *components = [calendar components: NSCalendarUnitYear|
+                                    NSCalendarUnitMonth|
+                                    NSCalendarUnitDay
+                                               fromDate:myDate];
+    [components setHour:0];
+    [components setMinute:0];
+    [components setSecond:0];
+    NSDate *newDate = [calendar dateFromComponents:components];
+    return newDate;
+}
+
 + (NSString *)getCityCountyFromString:(NSString *)title {
     NSRange searchResult = [title rangeOfString:@" of "];
     
@@ -69,7 +83,7 @@
             NSNumber *time = [quakeDictionary valueForKeyPath:EARTHQUAKE_TIME];
             NSTimeInterval timeInterval = [time doubleValue] / 1000.0;
             quake.time = [NSDate dateWithTimeIntervalSince1970:timeInterval];
-            
+            quake.date = [self setTimeToZero:quake.time];            
             [dateFormatter setDateFormat:DEFAULT_DATA_WITH_TIME_FORMAT];
             
             quake.subtitle = [dateFormatter stringFromDate:quake.time];
@@ -83,6 +97,8 @@
             intoManagedObjectCOntext:(NSManagedObjectContext *)context {
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//    NSArray *newIDs = [quakes valueForKeyPath:@"distinctUnionOfObject.eventId"];
+    
     for (NSDictionary *quake in quakes) {
         [self quakeWithEarthquakeInfo:quake inManagedObjectContext:context withDateFormat:dateFormatter];
     }
@@ -92,7 +108,7 @@
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:QUAKE_DATABASE];
     
     request.predicate = nil;
-    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:DEFAULT_SORT_ORDER ascending:YES]];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:DEFAULT_SORT_ORDER ascending:NO]];
     request.fetchLimit = 100;
     
     NSError *error;

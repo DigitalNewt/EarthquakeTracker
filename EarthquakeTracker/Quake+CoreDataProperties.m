@@ -2,7 +2,7 @@
 //  Quake+CoreDataProperties.m
 //  EarthquakeTracker
 //
-//  Created by Brent Baker on 2/10/16.
+//  Created by Brent Baker on 2/17/16.
 //  Copyright © 2016 HBB Global. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -13,16 +13,17 @@
 
 @implementation Quake (CoreDataProperties)
 
+@dynamic date;
 @dynamic depth;
 @dynamic detailURL;
 @dynamic eventId;
 @dynamic latitude;
 @dynamic longitude;
 @dynamic magnitude;
-@dynamic time;
-@dynamic tsunami;
-@dynamic title;
-@dynamic subtitle;
 @dynamic place;
+@dynamic subtitle;
+@dynamic time;
+@dynamic title;
+@dynamic tsunami;
 
 @end

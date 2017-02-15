@@ -82,8 +82,6 @@ NSString *const kQuery = @"query";
 {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
-    NSOperationQueue *backgroundQueue = [[NSOperationQueue alloc] init];
-    
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",rootURL, action, [self toURL:queryData]]]
                                                                 cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
                                                             timeoutInterval:50];
@@ -91,15 +89,14 @@ NSString *const kQuery = @"query";
     request.HTTPMethod = @"GET";
     [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     
-    [NSURLConnection sendAsynchronousRequest:request
-                                       queue:backgroundQueue
-                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-                               NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                               if (complete) {
-                                   complete(result, connectionError);
-                               }
-                               [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-                           }];
+    
+    [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable connectionError) {
+        NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        if (complete) {
+            complete(result, connectionError);
+        }
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    }] resume];
 }
 
 @end

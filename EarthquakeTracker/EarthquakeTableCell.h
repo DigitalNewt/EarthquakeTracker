@@ -10,20 +10,16 @@
 
 @interface EarthquakeTableCell : UITableViewCell
 
-@property (strong, nonatomic) IBOutlet UILabel *magnitude;
+@property (weak, nonatomic) IBOutlet UILabel *magnitude;
 
-@property (strong, nonatomic) IBOutlet UILabel *customTitle;
+@property (weak, nonatomic) IBOutlet UILabel *customTitle;
 
+@property (weak, nonatomic) IBOutlet UIView *statusColor;
 
-@property (strong, nonatomic) IBOutlet UILabel *dateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *timeIcon;
 
-@property (strong, nonatomic) IBOutlet UIView *statusColor;
-
-@property (strong, nonatomic) IBOutlet UILabel *dateIcon;
-@property (strong, nonatomic) IBOutlet UILabel *timeLabel;
-@property (strong, nonatomic) IBOutlet UILabel *timeIcon;
-
-@property (strong, nonatomic) IBOutlet UILabel *statusIcon;
+@property (weak, nonatomic) IBOutlet UILabel *statusIcon;
 @property (weak, nonatomic) IBOutlet UILabel *waveIconLabel;
 @property (weak, nonatomic) IBOutlet UILabel *tsunamiLabel;
 

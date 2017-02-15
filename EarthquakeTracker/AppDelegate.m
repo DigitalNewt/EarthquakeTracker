@@ -24,7 +24,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     self.quakeDatabaseContext = [self managedObjectContext];
-    [self fetchEarthquakeData:application performFetchWithCompletionHandler:UIBackgroundFetchResultNewData];
+    [self fetchEarthquakeData:application performFetchWithCompletionHandler:nil];
     return YES;
 }
 
@@ -36,6 +36,9 @@
         [APIManager requestHTTPGet:queryData withAction:kQuery onCompletion: ^(NSString *result, NSError *error){
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (error) {
+                    if (completionHandler) {
+                        completionHandler(UIBackgroundFetchResultFailed);
+                    }
                     NSLog(@"Earthquake background fetch failed: %@", error.localizedDescription);
                     [AlertUtility showMessage:NETWORK_ERROR_MESSAGE withTitle:NETWORK_ERROR_TITLE];
                     
@@ -43,6 +46,9 @@
                 } else {
                     [self stopFetchingEarthquakeData:result
                                          intoContext:self.quakeDatabaseContext];
+                    if (completionHandler) {
+                        completionHandler(UIBackgroundFetchResultNewData);
+                    }
                 }
             });
         }];
@@ -170,8 +176,15 @@
                     NSLog(@"Earthquake background fetch failed: %@", error.localizedDescription);
                     [AlertUtility showMessage:NETWORK_ERROR_MESSAGE withTitle:NETWORK_ERROR_TITLE];
                     NSLog(@"%@", error);
+                    if (completionHandler) {
+                        completionHandler(UIBackgroundFetchResultFailed);
+                    }
+                    
                 } else {
                     [self stopFetchingEarthquakeData:result intoContext:self.quakeDatabaseContext];
+                    if (completionHandler) {
+                        completionHandler(UIBackgroundFetchResultNewData);
+                    }
                 }
             });
         }];

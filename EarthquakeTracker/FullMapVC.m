@@ -117,6 +117,7 @@
 }
 
 - (void)viewDidLoad {
+    [super viewDidLoad];
     AppDelegate *appDelegate = UIApplication.sharedApplication.delegate;
     self.latestEarthquakes = [Quake getTopQuakes:appDelegate.managedObjectContext];
 }
@@ -127,6 +128,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [self updateFullMapViewAnnotations];
 }
 

@@ -43,12 +43,15 @@
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 46, 46)];
         view.leftCalloutAccessoryView = imageView;
         
-        UIButton *disclosureButton = [[UIButton alloc] init];
-        UIImage *disclosure = [self.textToImage convertTextToImage:DISCLOSURE withImageView:imageView withColor:[UIColor blackColor]];
+        UILabel *disclosureLabel = [[UILabel alloc] init];
+        disclosureLabel.frame = CGRectMake(0, 0, 46, 46);
+        disclosureLabel.text = DISCLOSURE;
+        disclosureLabel.font = [UIFont systemFontOfSize:35];
+        disclosureLabel.backgroundColor = [UIColor clearColor];
+        disclosureLabel.textColor = [UIColor blackColor];
+        [disclosureLabel sizeToFit];
         
-        [disclosureButton setBackgroundImage:disclosure forState:UIControlStateNormal];
-        [disclosureButton sizeToFit];
-        view.rightCalloutAccessoryView = disclosureButton;
+        view.rightCalloutAccessoryView = disclosureLabel;
     }
 
     view.annotation = annotation;
@@ -149,6 +152,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [self updateSingleMapViewAnnotations];
 
 }
